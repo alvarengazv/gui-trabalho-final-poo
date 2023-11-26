@@ -10,6 +10,6 @@ module com.example.trabalhofinalpoo {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
 
-    opens com.example.trabalhofinalpoo to javafx.fxml;
-    exports com.example.trabalhofinalpoo;
+    opens com.guilherme.testefx to javafx.fxml;
+    exports com.guilherme.testefx;
 }
