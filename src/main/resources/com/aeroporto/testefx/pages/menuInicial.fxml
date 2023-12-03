@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+
+<!--<?import org.kordamp.ikonli.javafx.FontIcon?>-->
+
+<AnchorPane fx:id="anchorPaneInicial" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-border-radius: 16px; -fx-background-radius: 16px; -fx-border-color: lightskyblue; -fx-border-width: 5px; -fx-background-color: lightskyblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aeroporto.testefx.MenuInicialController">
+   <children>
+      <ImageView fx:id="imagemFundo" fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fundoCeu.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="elementosMenu" prefHeight="720.0" prefWidth="1280.0">
+         <children>
+            <SVGPath content="M2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" fill="WHITE" layoutX="630.0" layoutY="397.0" scaleX="50.0" scaleY="30.0" strokeMiterLimit="20.0" strokeWidth="10.0" />
+            <SVGPath content="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5 M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z" fill="#899b51" layoutX="836.0" layoutY="360.0" scaleX="7.0" scaleY="7.0" strokeWidth="10.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </SVGPath>
+            <SVGPath content="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5 M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z" fill="#899b51" layoutX="433.0" layoutY="360.0" scaleX="7.0" scaleY="7.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </SVGPath>
+            <Label fx:id="labelEscolha" alignment="CENTER" layoutX="303.0" layoutY="476.0" prefHeight="58.0" prefWidth="675.0" text="Escolha uma opção" textFill="#3e4e40">
+               <font>
+                  <Font name="Merriweather Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="359.0" layoutY="422.0" onMouseClicked="#escolherArquivo" text="A r q u i v o" textFill="#3e4e40">
+               <font>
+                  <Font name="Merriweather Bold" size="30.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label layoutX="739.0" layoutY="422.0" onMouseClicked="#escolherAleatorio" text="A l e a t ó r i o" textFill="#3e4e40">
+               <font>
+                  <Font name="Merriweather Bold" size="30.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <JFXButton buttonType="RAISED" layoutX="505.0" layoutY="215.0" onAction="#iniciar" prefHeight="35.0" prefWidth="266.0" style="-fx-background-color: #899b50; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="INICIAR" textFill="#3e4e40">
+               <font>
+                  <Font name="Merriweather Bold" size="35.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label layoutX="218.0" layoutY="52.0" text="SISTEMA DE AEROPORTO" textFill="#899b51">
+               <font>
+                  <Font name="Merriweather Bold" size="65.0" />
+               </font>
+            </Label>
+            <Pane layoutX="377.0" layoutY="308.0" onMouseClicked="#escolherArquivo" prefHeight="118.0" prefWidth="123.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+            <Pane layoutX="784.0" layoutY="318.0" onMouseClicked="#escolherAleatorio" prefHeight="108.0" prefWidth="123.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+            <Pane layoutX="1234.0" layoutY="25.0" onMouseClicked="#fecharPagina" prefHeight="25.0" prefWidth="21.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+            <Pane layoutX="1179.0" layoutY="33.0" onMouseClicked="#minimizarPagina" prefHeight="12.0" prefWidth="30.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+         </children>
+      </Pane>
+      <Label fx:id="labelProgresso" layoutX="625.0" layoutY="385.0" opacity="0.0" text="0 %" textFill="#899b51">
+         <font>
+            <Font name="Merriweather Regular" size="15.0" />
+         </font>
+      </Label>
+      <SVGPath content="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" fill="#899b51" layoutX="1236.0" layoutY="30.0" scaleX="3.0" scaleY="3.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </SVGPath>
+      <ProgressBar fx:id="progressBar" layoutX="425.0" layoutY="341.0" opacity="0.0" prefHeight="39.0" prefWidth="431.0" progress="0.0" visible="false" />
+      <SVGPath content="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" fill="#899b51" layoutX="1186.0" layoutY="31.0" scaleX="3.0" scaleY="3.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </SVGPath>
+<!--   <FontIcon iconLiteral="anto-upload" iconColor="#596B42" iconSize="64"/>-->
+   </children>
+</AnchorPane>

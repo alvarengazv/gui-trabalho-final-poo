@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPaneInicial" blendMode="DARKEN" cacheHint="SCALE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" scaleShape="false" style="-fx-background-radius: 16px; -fx-border-radius: 16px; -fx-border-color: lightskyblue; -fx-border-width: 5px; -fx-background-color: lightskyblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aeroporto.testefx.CapaController">
+   <children>
+      <ImageView fx:id="imagemFundo" fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
+         <image>
+            <Image url="@../images/janelaAviao.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="1232.0" layoutY="27.0" onMouseClicked="#fecharPagina" prefHeight="25.0" prefWidth="24.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <children>
+            <SVGPath content="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" fill="WHITE" layoutX="4.0" layoutY="4.0" scaleX="3.0" scaleY="3.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </SVGPath>
+         </children>
+      </Pane>
+      <Pane layoutX="1183.0" layoutY="33.0" onMouseClicked="#minimizarPagina" prefHeight="11.0" prefWidth="24.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <children>
+            <SVGPath content="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" fill="WHITE" layoutX="5.0" layoutY="-2.0" scaleX="3.0" scaleY="3.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </SVGPath>
+         </children>
+      </Pane>
+      <Pane fx:id="textos" layoutY="84.0" onMouseClicked="#mudaTitulo" prefHeight="590.0" prefWidth="1282.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="8.0" layoutX="4.0" layoutY="29.0" prefHeight="110.0" prefWidth="1277.0" text="S I S T E M A   D E   A E R O P O R T O" textFill="#fffbfb">
+               <font>
+                  <Font name="Merriweather Bold" size="46.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="-3.0" layoutY="101.0" prefHeight="47.0" prefWidth="1284.0" text="T R A B A L H O   F I N A L  -  P O O  -  2 0 2 3 / 2" textFill="#596b42">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="-1.0" layoutY="258.0" prefHeight="47.0" prefWidth="1283.0" text="F E I T O   P O R :" textFill="#596b42">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutY="291.0" prefHeight="47.0" prefWidth="1283.0" text="G u i l h e r m e   A l v a r e n g a   d e   A z e v e d o" textFill="#596b42">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutY="316.0" prefHeight="47.0" prefWidth="1281.0" text="M a r i a   E d u a r d a   T e i x e i r a   S o u z a" textFill="#596b42">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutY="340.0" prefHeight="47.0" prefWidth="1281.0" text="M a t h e u s   E m a n u e l   d a   S i l v a" textFill="#596b42">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</AnchorPane>
