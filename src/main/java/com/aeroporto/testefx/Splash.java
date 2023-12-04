@@ -60,7 +60,7 @@ public class Splash
         pane.setMaxWidth(400);
 
         Line line = new Line();
-        line.setStroke(Color.LIGHTSKYBLUE);
+        line.setStroke(Color.valueOf("#899b50"));
         line.setStrokeWidth(7);
         line.setStrokeLineCap(StrokeLineCap.ROUND);
         line.setStartY(35);

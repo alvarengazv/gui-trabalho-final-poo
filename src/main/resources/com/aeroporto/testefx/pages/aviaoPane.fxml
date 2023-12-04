@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="45.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aeroporto.testefx.AviaoPaneController">
+   <children>
+      <Pane fx:id="paneAviao" layoutY="3.0" prefHeight="40.0" prefWidth="603.0">
+         <children>
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#596b42" height="40.0" layoutX="5.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="40.0" />
+            <ImageView fitHeight="39.0" fitWidth="29.0" layoutX="10.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/aviao.png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="29.0" layoutX="51.0" layoutY="6.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="49.0" />
+            <Label layoutX="58.0" layoutY="12.0" text="ID:" textFill="#899b50">
+               <font>
+                  <Font name="Merriweather Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="id" layoutX="80.0" layoutY="12.0" text="1" textFill="#3e4e40">
+               <font>
+                  <Font name="Merriweather Regular" size="12.0" />
+               </font>
+            </Label>
+            <Pane layoutX="569.0" layoutY="3.0" onMouseClicked="#abrirAviao" prefHeight="30.0" prefWidth="29.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <children>
+                  <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#596b42" height="29.0" layoutX="3.0" layoutY="2.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="24.0" />
+                  <SVGPath content="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" fill="WHITE" fillRule="EVEN_ODD" layoutX="7.0" layoutY="8.0" stroke="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </SVGPath>
+               </children>
+            </Pane>
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="29.0" layoutX="107.0" layoutY="6.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="126.0" />
+            <Label layoutX="116.0" layoutY="12.0" text="COMBUSTÍVEL:" textFill="#899b50">
+               <font>
+                  <Font name="Merriweather Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="combustivel" layoutX="213.0" layoutY="12.0" text="1" textFill="#3e4e40">
+               <font>
+                  <Font name="Merriweather Regular" size="12.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="29.0" layoutX="239.0" layoutY="6.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="145.0" />
+            <Label layoutX="248.0" layoutY="12.0" text="TEMPO DE ESPERA:" textFill="#899b50">
+               <font>
+                  <Font name="Merriweather Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="tempoEspera" layoutX="369.0" layoutY="12.0" text="1" textFill="#3e4e40">
+               <font>
+                  <Font name="Merriweather Regular" size="12.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="29.0" layoutX="389.0" layoutY="5.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="178.0" />
+            <Label layoutX="398.0" layoutY="11.0" text="PASSAGEIRO ESPECIAL:" textFill="#899b50">
+               <font>
+                  <Font name="Merriweather Regular" size="12.0" />
+               </font>
+            </Label>
+            <SVGPath fx:id="passageiroEspecial" content="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" layoutX="544.0" layoutY="11.0" scaleX="2.0" scaleY="2.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

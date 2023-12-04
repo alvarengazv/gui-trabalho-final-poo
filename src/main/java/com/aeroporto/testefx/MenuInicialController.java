@@ -134,6 +134,7 @@ public class MenuInicialController implements Initializable {
         pt.play();
 
         pt.setOnFinished(e -> {
+            elementosMenu.setVisible(false);
             mostrarProgresso(event);
         });
     }

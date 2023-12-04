@@ -3,12 +3,10 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
@@ -22,17 +20,17 @@
       </ImageView>
       <Pane fx:id="elementosPage" prefHeight="720.0" prefWidth="1280.0">
          <children>
-            <JFXButton buttonType="RAISED" layoutX="1007.0" layoutY="627.0" onAction="#simularMinuto" prefHeight="41.0" prefWidth="233.0" style="-fx-background-color: #899b51; -fx-background-radius: 50px; -fx-border-radius: 50px;" text="Simular Minuto" textFill="#3e4e40">
+            <JFXButton buttonType="RAISED" layoutX="1007.0" layoutY="627.0" onAction="#simularMinuto" prefHeight="49.0" prefWidth="233.0" style="-fx-background-color: #899b51; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Simular Minuto" textFill="#3e4e40">
                <font>
-                  <Font name="Merriweather Bold" size="24.0" />
+                  <Font name="Merriweather Bold" size="20.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <Pane layoutX="27.0" layoutY="27.0" onMouseClicked="#voltarPagina" prefHeight="36.0" prefWidth="37.0">
+            <Pane layoutX="45.0" layoutY="38.0" onMouseClicked="#voltarPagina" prefHeight="44.0" prefWidth="45.0">
                <children>
-                  <SVGPath content="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" fill="#899b51" layoutX="10.0" layoutY="10.0" scaleX="2.0" scaleY="2.0">
+                  <SVGPath content="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" fill="#899b51" layoutX="15.0" layoutY="14.0" scaleX="3.0" scaleY="3.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></SVGPath>
@@ -67,49 +65,32 @@
             </Pane>
             <Pane layoutX="46.0" layoutY="651.0" prefHeight="79.0" prefWidth="88.0">
                <children>
-                  <SVGPath fx:id="iconeEscolhido" content="M40,60 C42,48 44,30 25,32" fill="#899b51" layoutX="11.0" layoutY="-5.0" scaleX="3.0" scaleY="3.0">
-                     <effect>
-                        <DropShadow blurType="TWO_PASS_BOX" height="3.45" radius="0.9325000000000001" width="2.28">
-                           <color>
-                              <Color red="0.6274510025978088" green="0.7490196228027344" blue="0.47058823704719543" />
-                           </color>
-                        </DropShadow>
-                     </effect></SVGPath>
+                  <Rectangle arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="59.0" layoutX="-11.0" layoutY="-27.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="60.0" />
+                  <SVGPath fx:id="iconeEscolhido" content="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5 M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z" fill="#899b51" layoutX="11.0" layoutY="-5.0" scaleX="3.0" scaleY="3.0" />
                </children>
             </Pane>
-            <Label layoutX="510.0" layoutY="336.0" text="C l i m a :   S o l" textFill="#899b51">
-               <font>
-                  <Font name="Merriweather Bold" size="36.0" />
-               </font>
-               <effect>
-                  <DropShadow blurType="TWO_PASS_BOX" height="3.45" radius="0.9325000000000001" width="2.28">
-                     <color>
-                        <Color red="0.6274510025978088" green="0.7490196228027344" blue="0.47058823704719543" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Label>
             <Pane layoutX="449.0" layoutY="8.0" prefHeight="84.0" prefWidth="381.0">
                <children>
-                  <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#899b50" height="59.0" layoutX="14.0" layoutY="24.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="278.0" />
+                  <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#899b50" height="59.0" layoutX="14.0" layoutY="24.0" opacity="0.9" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="278.0" />
                   <Label layoutX="34.0" layoutY="40.0" text="MINUTOS SIMULADOS: " textFill="#596b42">
                      <font>
                         <Font name="Merriweather Regular" size="20.0" />
                      </font>
                   </Label>
-                  <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="59.0" layoutX="306.0" layoutY="24.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
-                  <Label fx:id="minutosSimuladosLabel" layoutX="330.0" layoutY="40.0" text="0" textFill="#3e4e40">
+                  <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="59.0" layoutX="306.0" layoutY="24.0" opacity="0.8" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+                  <Label fx:id="minutosSimuladosLabel" layoutX="331.0" layoutY="39.0" text="0" textFill="#3e4e40">
                      <font>
                         <Font name="Merriweather Regular" size="20.0" />
                      </font>
                   </Label>
                </children></Pane>
-            <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="76.0" layoutX="604.0" layoutY="625.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="278.0" />
-            <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#899b50" height="59.0" layoutX="613.0" layoutY="634.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
-            <Label layoutX="763.0" layoutY="650.0" text="Sol" textFill="#899b50">
+            <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="76.0" layoutX="501.0" layoutY="615.0" opacity="0.7" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="278.0" />
+            <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#899b50" height="59.0" layoutX="510.0" layoutY="624.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="60.0" />
+            <Label fx:id="climaLabel" alignment="CENTER" layoutX="565.0" layoutY="640.0" prefHeight="30.0" prefWidth="209.0" text="Sol" textFill="#899b50">
                <font>
                   <Font name="Merriweather Regular" size="20.0" />
                </font></Label>
+            <SVGPath fx:id="climaSvg" content="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" fill="WHITE" layoutX="531.0" layoutY="646.0" scaleX="3.0" scaleY="3.0" />
          </children></Pane>
    </children>
 </AnchorPane>

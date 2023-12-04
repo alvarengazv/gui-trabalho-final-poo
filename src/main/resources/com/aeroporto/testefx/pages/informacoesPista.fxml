@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPaneInicial" prefHeight="510.0" prefWidth="1280.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aeroporto.testefx.ElementosPistaController">
+   <children>
+      <SVGPath content="M2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" fill="WHITE" layoutX="350.0" layoutY="261.0" opacity="0.7" rotate="-90.0" scaleX="27.0" scaleY="38.0" strokeMiterLimit="20.0" strokeWidth="10.0" />
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#3e4e40" height="76.0" layoutX="102.0" layoutY="97.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="381.0" />
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="44.0" layoutX="104.0" layoutY="194.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="292.0" />
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="44.0" layoutX="104.0" layoutY="262.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="292.0" />
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="44.0" layoutX="104.0" layoutY="331.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="292.0" />
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="44.0" layoutX="104.0" layoutY="399.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="292.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#899b50" height="30.0" layoutX="417.0" layoutY="201.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="30.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#899b50" height="30.0" layoutX="417.0" layoutY="269.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="30.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#899b50" height="30.0" layoutX="417.0" layoutY="338.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="30.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#899b50" height="30.0" layoutX="417.0" layoutY="406.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="30.0" />
+      <Label fx:id="labelInfo1" alignment="CENTER" contentDisplay="CENTER" layoutX="141.0" layoutY="205.0" text="TEMPO MÉDIO DE ESPERA:" textFill="#3e4e40">
+         <font>
+            <Font name="Merriweather Regular" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelInfo2" layoutX="117.0" layoutY="273.0" text="ATERRISSAGENS EMERGENCIAIS" textFill="#3e4e40">
+         <font>
+            <Font name="Merriweather Regular" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelInfo3" layoutX="130.0" layoutY="342.0" text="AVIÕES PARA ATERRISSAGEM" textFill="#3e4e40">
+         <font>
+            <Font name="Merriweather Regular" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelInfo4" layoutX="143.0" layoutY="410.0" text="AVIÕES PARA DECOLAGEM" textFill="#3e4e40">
+         <font>
+            <Font name="Merriweather Regular" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelTempoMedioGlobal" layoutX="428.0" layoutY="208.0" text="0" textFill="#3e4e40">
+         <font>
+            <Font name="Merriweather Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelAterrissagensEmergenciais" layoutX="428.0" layoutY="276.0" text="0" textFill="#3e4e40">
+         <font>
+            <Font name="Merriweather Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelAvioesAterrissagem" layoutX="428.0" layoutY="344.0" text="0" textFill="#3e4e40">
+         <font>
+            <Font name="Merriweather Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelAvioesDecolagem" layoutX="428.0" layoutY="412.0" text="0" textFill="#3e4e40">
+         <font>
+            <Font name="Merriweather Bold" size="12.0" />
+         </font>
+      </Label>
+      <Pane fx:id="infoPistas" layoutX="754.0" layoutY="135.0" prefHeight="273.0" prefWidth="425.0">
+         <children>
+            <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="254.0" layoutX="7.0" layoutY="10.0" opacity="0.7" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="412.0" />
+            <Pane layoutX="22.0" layoutY="23.0" onMouseClicked="#abrirFilaAterrissagem1" prefHeight="62.0" prefWidth="381.0">
+               <children>
+                  <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#596b42" height="62.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="381.0" />
+                  <ImageView fitHeight="59.0" fitWidth="49.0" layoutX="310.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/pista.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="labelTituloInfo1" layoutX="25.0" layoutY="18.0" text="FILA DE ATERRISSAGEM 1" textFill="WHITE">
+                     <font>
+                        <Font name="Merriweather Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+            <Pane layoutX="22.0" layoutY="105.0" onMouseClicked="#abrirFilaAterrissagem2" prefHeight="62.0" prefWidth="381.0">
+               <children>
+                  <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#596b42" height="62.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="381.0" />
+                  <ImageView fitHeight="59.0" fitWidth="49.0" layoutX="310.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/pista.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="labelTituloInfo11" layoutX="25.0" layoutY="18.0" text="FILA DE ATERRISSAGEM 2" textFill="WHITE">
+                     <font>
+                        <Font name="Merriweather Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+            <Pane layoutX="22.0" layoutY="188.0" onMouseClicked="#abrirFilaDecolagem" prefHeight="62.0" prefWidth="381.0">
+               <children>
+                  <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#596b42" height="62.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="381.0" />
+                  <ImageView fitHeight="59.0" fitWidth="49.0" layoutX="310.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/pista.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="labelTituloInfo12" layoutX="25.0" layoutY="18.0" text="FILA DE DECOLAGEM" textFill="WHITE">
+                     <font>
+                        <Font name="Merriweather Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+         </children>
+      </Pane>
+      <Label fx:id="labelTituloInfo" layoutX="172.0" layoutY="122.0" text="INFORMAÇÕES PISTA:" textFill="#899b50">
+         <font>
+            <Font name="Merriweather Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

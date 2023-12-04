@@ -149,6 +149,7 @@ public class CapaController implements Initializable {
     }
 
     public void mudarParaMenu() throws IOException {
+        imagemFundo.setImage(null);
         Parent root = FXMLLoader.load(getClass().getResource("pages/menuInicial.fxml"));
         stage = (Stage) anchorPaneInicial.getScene().getWindow();
 
