@@ -64,7 +64,7 @@ public class ElementosGeraisController implements Initializable {
     }
 
     public void atualizaDados(){
-        //qtdAterrissagensEmergenciais.setText(String.valueOf(Aeroporto.));
+        qtdAterrissagensEmergenciais.setText(String.valueOf(AeroportoPageController.aeroporto.getQtdAterrissagemEmergencial()));
         qtdAvioesDecolagem.setText(String.valueOf(AeroportoPageController.aeroporto.calcularAeronavesEmEsperaDecolagem()));
         qtdAvioesAterrissagem.setText(String.valueOf(AeroportoPageController.aeroporto.calcularAeronavesEmEsperaAterrissagem()));
         tempoMedioGlobal.setText(String.format("%.2f", AeroportoPageController.aeroporto.tempoMedioTotal()));

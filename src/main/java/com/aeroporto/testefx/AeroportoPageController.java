@@ -1,7 +1,7 @@
 package com.aeroporto.testefx;
 
+import com.almasb.fxgl.core.Disposable;
 import javafx.animation.FadeTransition;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,16 +17,11 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,7 +29,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class AeroportoPageController implements Initializable {
+public class AeroportoPageController implements Initializable, Disposable {
 
     private String svgSol = "M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z";
     private String svgChuva = "M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 0 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 1 1-.948-.316l1-3a.5.5 0 0 1 .632-.317m.247-6.998a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973zM8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4.002 4.002 0 0 1 8.5 2";
@@ -45,7 +40,6 @@ public class AeroportoPageController implements Initializable {
     private double yOffset = 0;
     private Map<String, String> svgClimaMap = new HashMap<>();
     public static Map<Integer, FXMLLoader> paginasMap = new HashMap<>();
-    public static Map<Integer, Pane> paginasPaneMap = new HashMap<>();
     public static Aeronave aeronaveAtual;
     public static Pista pistaAtual = new Pista();
     public static FilaDeEspera filaAtual = new FilaDeEspera();
@@ -64,7 +58,6 @@ public class AeroportoPageController implements Initializable {
     private Label minutosSimuladosLabel;
     @FXML
     private Pane elementosPage;
-
     @FXML
     public static Pane paneElementosCentro = new Pane();
     @FXML
@@ -73,11 +66,10 @@ public class AeroportoPageController implements Initializable {
     private Label climaLabel;
 
     public static int paginaAtual = 0;
+    private boolean isAleatorio = true;
 
     public static int minutosSimulados = 0;
     public static Aeroporto aeroporto = new Aeroporto();
-
-    private int i = 1;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -120,7 +112,11 @@ public class AeroportoPageController implements Initializable {
     public void simularMinuto(ActionEvent actionEvent) throws IOException {
         minutosSimulados++;
         minutosSimuladosLabel.setText(String.valueOf(minutosSimulados));
-        aeroporto.simularMinuto();
+        if (isAleatorio) {
+            aeroporto.simularMinuto();
+        } else {
+            aeroporto.simularMinutoArquivo();
+        }
         voltarParaGerais();
         if(minutosSimulados % 10 == 0)
             mudafundo();
@@ -141,7 +137,8 @@ public class AeroportoPageController implements Initializable {
     }
 
     public void getAvioesArquivo(File arquivoAeronaves) throws FileNotFoundException {
-        Scanner sc = new Scanner(arquivoAeronaves);
+        isAleatorio = false;
+        Main.leituraArquivoAeronaves(arquivoAeronaves);
     }
 
     public void imagemRedonda(){
@@ -162,7 +159,6 @@ public class AeroportoPageController implements Initializable {
     }
 
     public void mudafundo(){
-        //String[] imagens = {"Sol", "Chuva", "Tempestade", "Nublado", "Neve"};
         String clima = aeroporto.getClima();
 
         climaSvg.setContent(svgClimaMap.get(clima));
@@ -171,10 +167,6 @@ public class AeroportoPageController implements Initializable {
         imagemFundo.setImage(null);
 
         imagemFundo.setImage(new Image(this.getClass().getResource("images/" + clima + ".gif").toExternalForm()));
-
-        /*i++;
-        if(i == 5)
-            i = 0;*/
     }
 
     public void fecharPagina(){
@@ -267,13 +259,14 @@ public class AeroportoPageController implements Initializable {
         if(alert.showAndWait().get() == ButtonType.OK){
             paneElementosCentro.getChildren().removeFirst();
             Parent root = FXMLLoader.load(getClass().getResource("pages/menuInicial.fxml"));
-            imagemFundo.setImage(null);
+
+            reiniciaDados();
 
             scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);
 
             stage.setScene(scene);
-
+            
             stage.show();
 
             root.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -297,5 +290,37 @@ public class AeroportoPageController implements Initializable {
                 fecharPagina();
             });
         }
+    }
+
+    public void reiniciaDados(){
+        imagemFundo.setImage(null);
+        iconeEscolhido.setContent(null);
+        climaSvg.setContent(null);
+        climaLabel.setText(null);
+        minutosSimuladosLabel.setText(null);
+        minutosSimulados = 0;
+        paneElementosCentro.getChildren().clear();
+        aeroporto = new Aeroporto();
+        Aeroporto.reset();
+        aeronaveAtual = null;
+        pistaAtual = new Pista();
+        filaAtual = new FilaDeEspera();
+        paginaAtual = 0;
+        isAleatorio = true;
+        svgClimaMap.clear();
+    }
+
+    @Override
+    public void dispose() {
+        anchorPaneInicial = null;
+        imagemFundo = null;
+        iconeEscolhido = null;
+        minutosSimuladosLabel = null;
+        elementosPage = null;
+        paneElementosCentro = null;
+        climaSvg = null;
+        climaLabel = null;
+        scene = null;
+        stage = null;
     }
 }

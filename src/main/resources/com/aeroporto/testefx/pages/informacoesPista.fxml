@@ -106,7 +106,7 @@
                   <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#596b42" height="62.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="381.0" />
                   <ImageView fitHeight="59.0" fitWidth="49.0" layoutX="310.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/pista.png" />
+                        <Image url="@../images/decolagem.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="labelTituloInfo12" layoutX="25.0" layoutY="18.0" text="FILA DE DECOLAGEM" textFill="WHITE">
