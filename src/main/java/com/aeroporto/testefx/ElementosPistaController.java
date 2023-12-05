@@ -2,48 +2,77 @@ package com.aeroporto.testefx;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ElementosPistaController {
+public class ElementosPistaController implements Initializable {
     @FXML
-    private Label labelAvioesDecolagem;
+    private Label qtdAvioesDecolagem;
     @FXML
-    private Label labelAvioesAterrissagem;
+    private Label qtdAvioesAterrissagem;
     @FXML
-    private Label labelAterrissagensEmergenciais;
+    private Label qtdAterrissagensEmergenciais;
     @FXML
-    private Label labelTempoMedioGlobal;
+    private Label tempoMedioEspera;
     @FXML
-    private Label labelTituloInfo;
-    @FXML
-    private Label labelInfo1;
-    @FXML
-    private Label labelInfo2;
-    @FXML
-    private Label labelInfo3;
-    @FXML
-    private Label labelInfo4;
-    @FXML
-    private Pane infoPistas;
+    private Label labelTitulo;
     @FXML
     private AnchorPane anchorPaneInicial;
+    private FilaDeEspera fila;
+    private Stage stage;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
 
     public void abrirFilaAterrissagem1() throws IOException {
+        AeroportoPageController.filaAtual = AeroportoPageController.pistaAtual.getFilaAterrissagem1();
+
         AeroportoPageController.voltarParaFila();
     }
 
     public void abrirFilaAterrissagem2() throws IOException {
+        if(AeroportoPageController.pistaAtual.getNome() == "Pista 3"){
+            alerta();
+            return;
+        }
+            AeroportoPageController.filaAtual = AeroportoPageController.pistaAtual.getFilaAterrissagem2();
+
         AeroportoPageController.voltarParaFila();
     }
 
     public void abrirFilaDecolagem() throws IOException {
+        AeroportoPageController.filaAtual = AeroportoPageController.pistaAtual.getFilaDecolagem();
+
         AeroportoPageController.voltarParaFila();
+    }
+
+    public void atualizaDados(){
+        labelTitulo.setText("INFORMAÇÕES " + AeroportoPageController.pistaAtual.getNome().toUpperCase() + ":");
+        qtdAvioesAterrissagem.setText(String.valueOf(AeroportoPageController.pistaAtual.quantidadeAeronavesAterrissagem()));
+        qtdAvioesDecolagem.setText(String.valueOf(AeroportoPageController.pistaAtual.quantidadeAeronavesDecolagem()));
+        //qtdAterrissagensEmergenciais.setText(String.valueOf(AeroportoPageController.pistaAtual.));
+        tempoMedioEspera.setText(String.format("%.2f", AeroportoPageController.pistaAtual.recalcularTempoMedioEspera()));
+    }
+
+    public void alerta(){
+        stage = (Stage) anchorPaneInicial.getScene().getWindow();;
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.initOwner(stage);
+        alert.setTitle("Alerta");
+        alert.setHeaderText("A Pista 3 não possui fila de aterrissagem 2!");
+        alert.showAndWait();
     }
 }

@@ -2,6 +2,7 @@ package com.aeroporto.testefx;
 
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,13 +26,11 @@ import java.util.ResourceBundle;
 
 public class ElementosFilaController implements Initializable {
     @FXML
-    private Label labelAvioesDecolagem;
+    private Label qtdAvioes;
     @FXML
-    private Label labelAvioesAterrissagem;
+    private Label qtdAterrissagensEmergenciais;
     @FXML
-    private Label labelAterrissagensEmergenciais;
-    @FXML
-    private Label labelTempoMedioGlobal;
+    private Label tempoMedioEspera;
     @FXML
     private Label id;
     @FXML
@@ -41,14 +40,14 @@ public class ElementosFilaController implements Initializable {
     @FXML
     private Label passageiroEspecial;
     @FXML
-    private Label labelInfo4;
+    private Label labelTitulo;
     @FXML
     private Pane paneAviao;
     @FXML
     private AnchorPane anchorPaneInicial;
     @FXML
     private ListView<Pane> listViewAvioes;
-    static Map<Integer, Aeronave> map = new HashMap<>();
+    public static Map<Integer, Aeronave> map = new HashMap<>();
 
     public void abrirAviao() throws IOException {
         AeroportoPageController.voltarParaAviao();
@@ -56,11 +55,7 @@ public class ElementosFilaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            montaLista();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
 
         //System.out.println(paneAviao.getChildren());
         //listViewAvioes.setItems(FXCollections.observableArrayList(map.keySet()));
@@ -73,9 +68,11 @@ public class ElementosFilaController implements Initializable {
     }
 
     public void montaLista() throws FileNotFoundException {
-        Main.leituraArquivoAeronaves();
+        //Main.leituraArquivoAeronaves();
+        map.clear();
+        listViewAvioes.getItems().clear();
 
-        for (Aeronave a : Main.filaAeronavesAterrissagemArquivo) {
+        for (Aeronave a : AeroportoPageController.filaAtual.getFila()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("pages/aviaoPane.fxml"));
             map.put(a.getId(), a);
             Pane pane = null;
@@ -91,5 +88,14 @@ public class ElementosFilaController implements Initializable {
 
             listViewAvioes.getItems().add(pane);
         }
+    }
+
+    public void atualizaDados(){
+        if(AeroportoPageController.pistaAtual.getNome() == "Pista 3")
+            labelTitulo.setStyle("-fx-font-size: 16px; -fx-font-family: Merriweather");
+        labelTitulo.setText(AeroportoPageController.filaAtual.getNome().toUpperCase() + ":");
+        qtdAvioes.setText(String.valueOf(AeroportoPageController.filaAtual.tamanho()));
+        //qtdAterrissagensEmergenciais.setText(String.valueOf(AeroportoPageController.filaAtual.em));
+        tempoMedioEspera.setText(String.format("%.2f", AeroportoPageController.filaAtual.tempoMedioDeEsperaFila()));
     }
 }

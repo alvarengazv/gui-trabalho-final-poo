@@ -52,7 +52,7 @@ public class Home extends Application {
                     try {
 
                         String css = this.getClass().getResource("css/app.css").toExternalForm();
-                        Parent root = FXMLLoader.load(getClass().getResource("pages/aeroportoPage.fxml"));
+                        Parent root = FXMLLoader.load(getClass().getResource("pages/menuInicial.fxml"));
 
                         Scene scene = new Scene(root);
 

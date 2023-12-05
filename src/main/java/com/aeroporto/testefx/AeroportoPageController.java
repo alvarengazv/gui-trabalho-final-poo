@@ -47,6 +47,8 @@ public class AeroportoPageController implements Initializable {
     public static Map<Integer, FXMLLoader> paginasMap = new HashMap<>();
     public static Map<Integer, Pane> paginasPaneMap = new HashMap<>();
     public static Aeronave aeronaveAtual;
+    public static Pista pistaAtual = new Pista();
+    public static FilaDeEspera filaAtual = new FilaDeEspera();
 
     private Scene scene;
     private Stage stage;
@@ -72,12 +74,14 @@ public class AeroportoPageController implements Initializable {
 
     public static int paginaAtual = 0;
 
-    private int minutosSimulados = 0;
+    public static int minutosSimulados = 0;
+    public static Aeroporto aeroporto = new Aeroporto();
 
     private int i = 1;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        minutosSimuladosLabel.setText(String.valueOf(minutosSimulados));
         paneElementosCentro.setLayoutX(1);
         paneElementosCentro.setLayoutY(99);
         paneElementosCentro.setPrefWidth(1280);
@@ -113,10 +117,13 @@ public class AeroportoPageController implements Initializable {
         mostrarTudo();
     }
 
-    public void simularMinuto(ActionEvent actionEvent){
+    public void simularMinuto(ActionEvent actionEvent) throws IOException {
         minutosSimulados++;
         minutosSimuladosLabel.setText(String.valueOf(minutosSimulados));
-        mudafundo();
+        aeroporto.simularMinuto();
+        voltarParaGerais();
+        if(minutosSimulados % 10 == 0)
+            mudafundo();
     }
 
     public void mostrarTudo(){
@@ -155,18 +162,19 @@ public class AeroportoPageController implements Initializable {
     }
 
     public void mudafundo(){
-        String[] imagens = {"Sol", "Chuva", "Tempestade", "Nublado", "Neve"};
+        //String[] imagens = {"Sol", "Chuva", "Tempestade", "Nublado", "Neve"};
+        String clima = aeroporto.getClima();
 
-        climaSvg.setContent(svgClimaMap.get(imagens[i]));
-        climaLabel.setText(imagens[i]);
+        climaSvg.setContent(svgClimaMap.get(clima));
+        climaLabel.setText(clima);
 
         imagemFundo.setImage(null);
 
-        imagemFundo.setImage(new Image(this.getClass().getResource("images/" + imagens[i] + ".gif").toExternalForm()));
+        imagemFundo.setImage(new Image(this.getClass().getResource("images/" + clima + ".gif").toExternalForm()));
 
-        i++;
+        /*i++;
         if(i == 5)
-            i = 0;
+            i = 0;*/
     }
 
     public void fecharPagina(){
@@ -211,18 +219,28 @@ public class AeroportoPageController implements Initializable {
     }
 
     public static void voltarParaGerais() throws IOException {
+        ElementosGeraisController controller = paginasMap.get(0).getController();
+        controller.atualizaDados();
+
         paneElementosCentro.getChildren().removeFirst();
         paneElementosCentro.getChildren().add(paginasMap.get(0).getRoot());
         paginaAtual = 0;
     }
 
     public static void voltarParaPista() throws IOException {
+        ElementosPistaController controller = paginasMap.get(1).getController();
+        controller.atualizaDados();
+
         paneElementosCentro.getChildren().removeFirst();
         paneElementosCentro.getChildren().add(paginasMap.get(1).getRoot());
         paginaAtual = 1;
     }
 
     public static void voltarParaFila() throws IOException {
+        ElementosFilaController controller = paginasMap.get(2).getController();
+        controller.montaLista();
+        controller.atualizaDados();
+
         paneElementosCentro.getChildren().removeFirst();
         paneElementosCentro.getChildren().add(paginasMap.get(2).getRoot());
         paginaAtual = 2;
