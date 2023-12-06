@@ -182,4 +182,20 @@ public class Pista {
         filaDecolagem.imprimirFila();
     }
 
+    public int getQtdAeronavesEmergencia(){
+        int qtd = 0;
+        for(Aeronave a : filaAterrissagem1.getFila()){
+            if(a.verificarCombustivelCritico()){
+                qtd++;
+            }
+        }
+        if(filaAterrissagem2 != null){
+            for(Aeronave a : filaAterrissagem2.getFila()){
+                if(a.verificarCombustivelCritico()){
+                    qtd++;
+                }
+            }
+        }
+        return qtd;
+    }
 }

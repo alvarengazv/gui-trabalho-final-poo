@@ -12,7 +12,11 @@
 
 <AnchorPane fx:id="anchorPaneInicial" prefHeight="510.0" prefWidth="1280.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aeroporto.testefx.ElementosGeraisController">
    <children>
-      <SVGPath content="M2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" fill="WHITE" layoutX="350.0" layoutY="261.0" opacity="0.7" rotate="-90.0" scaleX="27.0" scaleY="38.0" strokeMiterLimit="20.0" strokeWidth="10.0" />
+      <ImageView fitHeight="402.0" fitWidth="492.0" layoutX="83.0" layoutY="70.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/fundo-branco.png" />
+         </image>
+      </ImageView>
       <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#3e4e40" height="76.0" layoutX="102.0" layoutY="97.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="381.0" />
       <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="44.0" layoutX="104.0" layoutY="194.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="292.0" />
       <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="44.0" layoutX="104.0" layoutY="262.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="292.0" />
@@ -62,7 +66,7 @@
             <Font name="Merriweather Bold" size="12.0" />
          </font>
       </Label>
-      <Pane fx:id="infoPistas" layoutX="754.0" layoutY="135.0" prefHeight="273.0" prefWidth="425.0">
+      <Pane fx:id="infoPistas" layoutX="751.0" layoutY="140.0" prefHeight="273.0" prefWidth="425.0">
          <children>
             <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="254.0" layoutX="7.0" layoutY="10.0" opacity="0.7" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="412.0" />
             <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#596b42" height="76.0" layoutX="22.0" layoutY="23.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="381.0" />

@@ -95,6 +95,7 @@ public class MenuInicialController implements Initializable {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Abrir arquivo de aeronaves");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
 
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Arquivos de Texto", "*.txt")

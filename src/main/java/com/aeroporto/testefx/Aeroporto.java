@@ -601,6 +601,10 @@ public class Aeroporto {
         return qtdAterrissagemEmergencial;
     }
 
+    public int getQtdAeronavesEmergencia(){
+        return pista1.getQtdAeronavesEmergencia() + pista2.getQtdAeronavesEmergencia() + pista3.getQtdAeronavesEmergencia();
+    }
+
     public static void reset() {
         pista1 = new Pista("Pista 1", true);
         pista2 = new Pista("Pista 2", true);

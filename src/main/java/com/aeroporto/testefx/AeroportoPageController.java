@@ -59,6 +59,8 @@ public class AeroportoPageController implements Initializable, Disposable {
     @FXML
     private Pane elementosPage;
     @FXML
+    private Pane svgAlerta;
+    @FXML
     public static Pane paneElementosCentro = new Pane();
     @FXML
     private SVGPath climaSvg;
@@ -117,6 +119,10 @@ public class AeroportoPageController implements Initializable, Disposable {
         } else {
             aeroporto.simularMinutoArquivo();
         }
+        if(aeroporto.getQtdAeronavesEmergencia() >= 3)
+            svgAlerta.setVisible(true);
+        else
+            svgAlerta.setVisible(false);
         voltarParaGerais();
         if(minutosSimulados % 10 == 0)
             mudafundo();
@@ -292,6 +298,18 @@ public class AeroportoPageController implements Initializable, Disposable {
         }
     }
 
+    public void alertaEmergencia() {
+        stage = (Stage) anchorPaneInicial.getScene().getWindow();;
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(stage);
+        alert.setTitle("Alerta");
+        alert.setHeaderText("Aeroporto em estado crítico!");
+        alert.setContentText("Há " + aeroporto.getQtdAeronavesEmergencia() + " aeronaves em estado de emergência!");
+
+        alert.showAndWait();
+    }
+
     public void reiniciaDados(){
         imagemFundo.setImage(null);
         iconeEscolhido.setContent(null);
@@ -322,5 +340,6 @@ public class AeroportoPageController implements Initializable, Disposable {
         climaLabel = null;
         scene = null;
         stage = null;
+        svgAlerta = null;
     }
 }
