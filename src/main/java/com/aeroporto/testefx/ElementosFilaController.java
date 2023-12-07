@@ -36,7 +36,11 @@ public class ElementosFilaController implements Initializable {
     @FXML
     private Label labelTitulo;
     @FXML
+    private Label labelInfo2;
+    @FXML
     private Pane paneAviao;
+    @FXML
+    private Pane aterrissagemEmegencial;
     @FXML
     private AnchorPane anchorPaneInicial;
     @FXML
@@ -86,11 +90,17 @@ public class ElementosFilaController implements Initializable {
     }
 
     public void atualizaDados(){
-        if(AeroportoPageController.pistaAtual.getNome() == "Pista 3")
+        if(AeroportoPageController.pistaAtual.getNome().equals("Pista 3"))
             labelTitulo.setStyle("-fx-font-size: 16px; -fx-font-family: Merriweather; -fx-font-weight: bold");
+        if(AeroportoPageController.filaAtual.getNome().equals("Fila de Decolagem")){
+            labelInfo2.setText("DECOLAGENS REALIZADAS:");
+            qtdAterrissagensEmergenciais.setText(String.valueOf(AeroportoPageController.filaAtual.getQtdAeronavesDecolaram()));
+        } else {
+            labelInfo2.setText("ATERRISSAGENS EMERGENCIAIS:");
+            qtdAterrissagensEmergenciais.setText(String.valueOf(AeroportoPageController.filaAtual.getQtdAterrissagensEmergenciais()));
+        }
         labelTitulo.setText(AeroportoPageController.filaAtual.getNome().toUpperCase() + ":");
         qtdAvioes.setText(String.valueOf(AeroportoPageController.filaAtual.tamanho()));
-        //qtdAterrissagensEmergenciais.setText(String.valueOf(AeroportoPageController.filaAtual.em));
         tempoMedioEspera.setText(String.format("%.2f", AeroportoPageController.filaAtual.tempoMedioDeEsperaFila()));
     }
 }

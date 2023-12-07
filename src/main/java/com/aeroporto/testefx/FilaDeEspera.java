@@ -11,6 +11,8 @@ public class FilaDeEspera {
     private double tempoMedioDeEspera = 0;
     private double tempoDeEsperaTotal = 0;
     private String nome;
+    private int qtdAterrissagensEmergenciais;
+    private int qtdAeronavesDecolaram;
 
     public FilaDeEspera() {
         this.fila = new LinkedList<>();
@@ -19,6 +21,17 @@ public class FilaDeEspera {
     public FilaDeEspera(String nome) {
         this.fila = new LinkedList<>();
         this.nome = nome;
+        if(!nome.equals("Fila de Decolagem")){
+            this.qtdAeronavesDecolaram = -1;
+        }
+    }
+
+    public int getQtdAeronavesDecolaram(){
+        return this.qtdAeronavesDecolaram;
+    }
+
+    public void setQtdAeronavesDecolaram(int qtd){
+        this.qtdAeronavesDecolaram = qtd;
     }
 
     public Queue<Aeronave> getFila() {
@@ -59,13 +72,7 @@ public class FilaDeEspera {
     }
 
     public int tamanho() {
-        int tamanho = fila.size();
-
-        if (tamanho == 0) {
-            return 0;
-        } else {
-            return tamanho;
-        }
+        return fila.size();
     }
 
     public double tempoMedioDeEsperaFila() {
@@ -82,11 +89,7 @@ public class FilaDeEspera {
             tempoDeEsperaTotal += a.getTempoEspera();
         }
 
-        if (tempoDeEsperaTotal == 0) {
-            return 0;
-        } else {
-            return tempoDeEsperaTotal;
-        }
+        return tempoDeEsperaTotal;
     }
 
     public void verificarCombustivelCritico() {
@@ -108,9 +111,37 @@ public class FilaDeEspera {
         System.out.println();
     }
 
+    public int qntPassagueirosEspeciais() {
+        int qtdPassageirosEspeciais = 0;
+        for (Aeronave a : fila) {
+            if (a.getPassageiroEspecial()) {
+                qtdPassageirosEspeciais++;
+            }
+        }
+        return qtdPassageirosEspeciais;
+    }
+
+    public int qntAeronavesCombustivelCritico() {
+        int qtdAeronavesCombustivelCritico = 0;
+        for (Aeronave a : fila) {
+            if (a.verificarCombustivelCritico()) {
+                qtdAeronavesCombustivelCritico++;
+            }
+        }
+        return qtdAeronavesCombustivelCritico;
+    }
+
     public void imprimirQtd() {
         qtdAvioes = fila.size();
         System.out.println("O número de aviões na fila eh: " + qtdAvioes);
+    }
+
+    public void setQtdAterrissagensEmergenciais(int qtd){
+        this.qtdAterrissagensEmergenciais = qtd;
+    }
+
+    public int getQtdAterrissagensEmergenciais(){
+        return this.qtdAterrissagensEmergenciais;
     }
 
 }

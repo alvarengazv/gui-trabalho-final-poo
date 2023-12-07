@@ -1,11 +1,6 @@
 package com.aeroporto.testefx;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Aeroporto {
     private Scanner sc = new Scanner(System.in);
@@ -134,17 +129,10 @@ public class Aeroporto {
         Random random = new Random();
         int valor = random.nextInt(60);
 
-        if (valor < 10) {
-            clima = Clima.Chuva.toString();
-        } else if (valor < 20) {
-            clima = Clima.Neve.toString();
-        } else if (valor < 30) {
-            clima = Clima.Tempestade.toString();
-        } else if (valor < 40) {
-            clima = Clima.Nublado.toString();
-        } else {
-            clima = Clima.Sol.toString();
-        }
+        clima = (valor < 10) ? Clima.Chuva.toString()
+                : (valor < 20) ? Clima.Neve.toString()
+                : (valor < 30) ? Clima.Tempestade.toString()
+                : (valor < 40) ? Clima.Nublado.toString() : Clima.Sol.toString();
     }
 
     public void adicionarAeronaveFilaAterrisagem(Aeronave aeronave) {
@@ -164,13 +152,12 @@ public class Aeroporto {
     }
 
     public Pista escolherPistaAterrissagem() {
-        if (pista1.quantidadeAeronavesAterrissagem() < pista2.quantidadeAeronavesAterrissagem()) {
+        if (pista1.quantidadeAeronavesAterrissagem() <= pista2.quantidadeAeronavesAterrissagem()) {
             return pista1;
         } else if (pista1.quantidadeAeronavesAterrissagem() > pista2.quantidadeAeronavesAterrissagem()) {
             return pista2;
         } else {
-            // Tem que fazer a lógica ainda
-            return pista1;
+            return pista2;
         }
     }
 
@@ -179,13 +166,12 @@ public class Aeroporto {
             auxContQntAeronavesFilaDecolagem++;
             return pista3;
         } else {
-            if (pista1.quantidadeAeronavesDecolagem() < pista2.quantidadeAeronavesDecolagem()) {
+            if (pista1.quantidadeAeronavesDecolagem() <= pista2.quantidadeAeronavesDecolagem()) {
                 return pista1;
             } else if (pista1.quantidadeAeronavesDecolagem() > pista2.quantidadeAeronavesDecolagem()) {
                 return pista2;
             } else {
-                // Tem que fazer a lógica ainda
-                return pista1;
+                return pista2;
             }
         }
     }
@@ -267,21 +253,31 @@ public class Aeroporto {
     }
 
     public void gerarAeronaves() {
-        Random random = new Random();
-
-        clearConsole();
-
         System.out.println("Gerando aeronaves...");
 
-        int aeronavesAterrissagem = random.nextInt(13);
+        gerarAeronaveAterrissagem();
 
+        System.out.print("-------------");
+        //sc.nextLine();
+
+        gerarAeronaveDecolagem();
+
+        System.out.println("Aeronaves geradas com sucesso!");
+        System.out.println("-------------");
+        //sc.nextLine();
+        clearConsole();
+    }
+
+    private void gerarAeronaveAterrissagem() {
+        Random random = new Random();
+
+        int aeronavesAterrissagem = random.nextInt(13);
         System.out.println("\nATERRISSAGEM : \nChegando " + aeronavesAterrissagem + " aeronaves para aterrissagem...");
 
         for (int i = 0; i < aeronavesAterrissagem; i++) {
             System.out.println("\nAviao " + idsAeronavesAterrissagem + " de aterrissagem.");
             int numPassageiros = random.nextInt(380) + 1;
             int combustivel = random.nextInt(15) + 1;
-
 
             String companhiaAerea = CompanhiaAerea.values()[random.nextInt(CompanhiaAerea.values().length)].toString();
 
@@ -293,9 +289,10 @@ public class Aeroporto {
 
             adicionarAeronaveFilaAterrisagem(aeronave);
         }
+    }
 
-        System.out.print("-------------");
-        //sc.nextLine();
+    private void gerarAeronaveDecolagem() {
+        Random random = new Random();
 
         int aeronavesDecolagem = random.nextInt(9);
         System.out.println("\nDECOLAGEM : \n" + "Chegando " + aeronavesDecolagem + " aeronaves para decolagem...");
@@ -314,11 +311,6 @@ public class Aeroporto {
 
             adicionarAeronaveFilaDecolagem(aeronave);
         }
-
-        System.out.println("Aeronaves geradas com sucesso!");
-        System.out.println("-------------");
-        //sc.nextLine();
-        clearConsole();
     }
 
     public void lerAeronave() {
@@ -364,58 +356,158 @@ public class Aeroporto {
         clearConsole();
     }
 
-    public void aterrissagem() {
-        if (pista1.getFilaAterrissagem1().tamanho() > pista1.getFilaAterrissagem2().tamanho()) {
-            if (pista1.getFilaAterrissagem1().getFila().isEmpty()) {
-                System.out.println("Não há aeronaves na fila de aterrissagem 1.");
+    public boolean escolherFilaParaAterrissar(FilaDeEspera fila1, FilaDeEspera fila2) {
+        List<Aeronave> filaPoucoCombustivel1 = new LinkedList<Aeronave>();
+        List<Aeronave> filaPoucoCombustivel2 = new LinkedList<Aeronave>();
+
+        for (Aeronave a : fila1.getFila()) {
+            if (a.getCombustivel() < 6) {
+                filaPoucoCombustivel1.add(a);
+            }
+        }
+
+        for (Aeronave a : fila2.getFila()) {
+            if (a.getCombustivel() < 6) {
+                filaPoucoCombustivel2.add(a);
+            }
+        }
+
+        if (filaPoucoCombustivel1.isEmpty() && filaPoucoCombustivel2.isEmpty()) {
+            return true;
+        } else if (filaPoucoCombustivel1.isEmpty()) {
+            return false;
+        } else if (filaPoucoCombustivel2.isEmpty()) {
+            return true;
+        } else {
+            filaPoucoCombustivel1.sort((a1, a2) -> a1.getCombustivel() - a2.getCombustivel());
+            filaPoucoCombustivel2.sort((a1, a2) -> a1.getCombustivel() - a2.getCombustivel());
+
+            if (filaPoucoCombustivel1.get(0).getCombustivel() < filaPoucoCombustivel2.get(0).getCombustivel()) {
+                return true;
+            } else if (filaPoucoCombustivel1.get(0).getCombustivel() > filaPoucoCombustivel2.get(0).getCombustivel()) {
+                return false;
             } else {
-                System.out.println(
-                        "Aeronave " + pista1.getFilaAterrissagem1().getFila().peek().getId()
-                                + " aterrissando na pista 1 da fila 1.");
+                int qntPassageirosEspeciais1 = 0;
+                int qntPassageirosEspeciais2 = 0;
+
+                for (Aeronave a : filaPoucoCombustivel1) {
+                    if (a.getPassageiroEspecial()) {
+                        qntPassageirosEspeciais1++;
+                    }
+                }
+
+                for (Aeronave a : filaPoucoCombustivel2) {
+                    if (a.getPassageiroEspecial()) {
+                        qntPassageirosEspeciais2++;
+                    }
+                }
+
+                if (qntPassageirosEspeciais1 > qntPassageirosEspeciais2) {
+                    return true;
+                } else if (qntPassageirosEspeciais1 < qntPassageirosEspeciais2) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+    }
+
+    public void aterrissagem() {
+        if (pista1.getFilaAterrissagem1().getFila().isEmpty()) {
+            System.out.println("Não há aeronaves na fila de aterrissagem 1 da pista 1.");
+        }
+        if (pista1.getFilaAterrissagem2().getFila().isEmpty()) {
+            System.out.println("Não há aeronaves na fila de aterrissagem 2 da pista 1.");
+        }
+        if (!pista1.getFilaAterrissagem1().getFila().isEmpty() && !pista1.getFilaAterrissagem2().getFila().isEmpty()) {
+            if (escolherFilaParaAterrissar(pista1.getFilaAterrissagem1(), pista1.getFilaAterrissagem2())) {
                 somarTempoEsperaTotalTodasAeronavesSairam(
                         pista1.getFilaAterrissagem1().getFila().peek().getTempoEspera());
-                pista1.getFilaAterrissagem1().removerAeronave();
-                aterrissagem1 = true;
+                Aeronave a = acharAeronaveMenorCombustivel(pista1.getFilaAterrissagem1());
+                if (a != null) {
+                    System.out.println(
+                            "Aeronave " + a.getId() + " aterrissando na pista 1 da fila 1.");
+                    pista1.getFilaAterrissagem1().getFila().remove(a);
+                    pista1.setQtdAterrissagensEmergenciais(pista1.getQtdAterrissagensEmergenciais() + 1);
+                    pista1.getFilaAterrissagem1().setQtdAterrissagensEmergenciais(pista1.getFilaAterrissagem1().getQtdAterrissagensEmergenciais() + 1);
+                    setQntAterrissagemEmergencial(qtdAterrissagemEmergencial + 1);
+                }else {
+                    System.out.println(
+                            "Aeronave " + pista1.getFilaAterrissagem1().getFila().peek().getId()
+                                    + " aterrissando na pista 1 da fila 1.");
+                    pista1.getFilaAterrissagem1().removerAeronave();
+                }aterrissagem1 = true;
                 qntTotalAeronavesSairam++;
-            }
-        } else {
-            if (pista1.getFilaAterrissagem2().getFila().isEmpty()) {
-                System.out.println("Não há aeronaves na fila de aterrissagem 2.");
             } else {
                 System.out.println(
                         "Aeronave " + pista1.getFilaAterrissagem2().getFila().peek().getId()
                                 + " aterrissando na pista 1 da fila 2.");
-                somarTempoEsperaTotalTodasAeronavesSairam(
-                        pista1.getFilaAterrissagem2().getFila().peek().getTempoEspera());
-                pista1.getFilaAterrissagem2().removerAeronave();
-                aterrissagem1 = true;
-                qntTotalAeronavesSairam++;
+                somarTempoEsperaTotalTodasAeronavesSairam(pista1.getFilaAterrissagem2().getFila().peek().getTempoEspera());
+                Aeronave a = acharAeronaveMenorCombustivel(pista1.getFilaAterrissagem2());
+                if (a != null) {
+                    System.out.println(
+                            "Aeronave " + a.getId() + " aterrissando na pista 1 da fila 1.");
+                    pista1.getFilaAterrissagem2().getFila().remove(a);
+                    pista1.setQtdAterrissagensEmergenciais(pista1.getQtdAterrissagensEmergenciais() + 1);
+                    pista1.getFilaAterrissagem2().setQtdAterrissagensEmergenciais(pista1.getFilaAterrissagem2().getQtdAterrissagensEmergenciais() + 1);
+                    setQntAterrissagemEmergencial(qtdAterrissagemEmergencial + 1);
+                } else {
+                    System.out.println(
+                            "Aeronave " + pista1.getFilaAterrissagem1().getFila().peek().getId()
+                                    + " aterrissando na pista 1 da fila 1.");
+                    pista1.getFilaAterrissagem2().removerAeronave();
+                }
+                    aterrissagem1 = true;
+                    qntTotalAeronavesSairam++;
             }
         }
 
-        if (pista2.getFilaAterrissagem1().tamanho() > pista2.getFilaAterrissagem2().tamanho()) {
-            if (pista2.getFilaAterrissagem1().getFila().isEmpty()) {
-                System.out.println("Não há aeronaves na fila de aterrissagem 1.");
-            } else {
-                System.out.println(
-                        "Aeronave " + pista2.getFilaAterrissagem1().getFila().peek().getId()
-                                + " aterrissando na pista 2 da fila 1.");
+
+        if (pista2.getFilaAterrissagem1().getFila().isEmpty()) {
+            System.out.println("Não há aeronaves na fila de aterrissagem 1 da pista 2.");
+        }
+        if (pista2.getFilaAterrissagem2().getFila().isEmpty()) {
+            System.out.println("Não há aeronaves na fila de aterrissagem 2 da pista 2.");
+        }
+        if (!pista2.getFilaAterrissagem1().getFila().isEmpty() && !pista2.getFilaAterrissagem2().getFila().isEmpty()) {
+            if (escolherFilaParaAterrissar(pista2.getFilaAterrissagem1(), pista2.getFilaAterrissagem2())) {
                 somarTempoEsperaTotalTodasAeronavesSairam(
                         pista2.getFilaAterrissagem1().getFila().peek().getTempoEspera());
-                pista2.getFilaAterrissagem1().removerAeronave();
+                Aeronave a = acharAeronaveMenorCombustivel(pista2.getFilaAterrissagem1());
+
+                if (a != null) {
+                    pista2.getFilaAterrissagem1().getFila().remove(a);
+                    setQntAterrissagemEmergencial(qtdAterrissagemEmergencial + 1);
+                    pista2.setQtdAterrissagensEmergenciais(pista2.getQtdAterrissagensEmergenciais() + 1);
+                    pista2.getFilaAterrissagem1().setQtdAterrissagensEmergenciais(pista2.getFilaAterrissagem1().getQtdAterrissagensEmergenciais() + 1);
+                    System.out.println(
+                            "Aeronave " + a.getId() + " aterrissando na pista 2 da fila 1.");
+                } else {
+                    System.out.println(
+                            "Aeronave " + pista2.getFilaAterrissagem1().getFila().peek().getId()
+                                    + " aterrissando na pista 2 da fila 1.");
+                    pista2.getFilaAterrissagem1().removerAeronave();
+                }
                 aterrissagem2 = true;
                 qntTotalAeronavesSairam++;
-            }
-        } else {
-            if (pista2.getFilaAterrissagem2().getFila().isEmpty()) {
-                System.out.println("Não há aeronaves na fila de aterrissagem 2.");
+
             } else {
-                System.out.println(
-                        "Aeronave " + pista2.getFilaAterrissagem2().getFila().peek().getId()
-                                + " aterrissando na pista 2 da fila 2.");
-                somarTempoEsperaTotalTodasAeronavesSairam(
-                        pista2.getFilaAterrissagem2().getFila().peek().getTempoEspera());
-                pista2.getFilaAterrissagem2().removerAeronave();
+                    somarTempoEsperaTotalTodasAeronavesSairam(
+                            pista2.getFilaAterrissagem2().getFila().peek().getTempoEspera());
+                Aeronave a = acharAeronaveMenorCombustivel(pista2.getFilaAterrissagem2());
+                if (a != null) {
+                    pista2.getFilaAterrissagem2().getFila().remove(a);
+                    setQntAterrissagemEmergencial(qtdAterrissagemEmergencial + 1);
+                    pista2.setQtdAterrissagensEmergenciais(pista2.getQtdAterrissagensEmergenciais() + 1);
+                    pista2.getFilaAterrissagem2().setQtdAterrissagensEmergenciais(pista2.getFilaAterrissagem2().getQtdAterrissagensEmergenciais() + 1);
+                    System.out.println("Aeronave " + a.getId() + " aterrissando na pista 2 da fila 2.");
+                } else {
+                    System.out.println(
+                            "Aeronave " + pista2.getFilaAterrissagem2().getFila().peek().getId()
+                                    + " aterrissando na pista 2 da fila 2.");
+                    pista2.getFilaAterrissagem2().removerAeronave();
+                }
                 aterrissagem2 = true;
                 qntTotalAeronavesSairam++;
             }
@@ -427,11 +519,46 @@ public class Aeroporto {
             System.out.println(
                     "Aeronave " + pista3.getFilaAterrissagem1().getFila().peek().getId() + " aterrissando na pista 3.");
             somarTempoEsperaTotalTodasAeronavesSairam(pista3.getFilaAterrissagem1().getFila().peek().getTempoEspera());
-            pista3.getFilaAterrissagem1().removerAeronave();
+            Aeronave a = acharAeronaveMenorCombustivel(pista3.getFilaAterrissagem1());
+
+            if (a != null) {
+                pista3.getFilaAterrissagem1().getFila().remove(a);
+                setQntAterrissagemEmergencial(qtdAterrissagemEmergencial + 1);
+                pista3.setQtdAterrissagensEmergenciais(pista3.getQtdAterrissagensEmergenciais() + 1);
+                pista3.getFilaAterrissagem1().setQtdAterrissagensEmergenciais(pista3.getFilaAterrissagem1().getQtdAterrissagensEmergenciais() + 1);
+                System.out.println(
+                        "Aeronave " + a.getId() + " aterrissando na pista 3.");
+            } else {
+                System.out.println(
+                        "Aeronave " + pista3.getFilaAterrissagem1().getFila().peek().getId()
+                                + " aterrissando na pista 3.");
+                pista3.getFilaAterrissagem1().removerAeronave();
+            }
             aterrissagem3 = true;
             qntTotalAeronavesSairam++;
-            qtdAterrissagemEmergencial++;
         }
+    }
+
+    public Aeronave acharAeronaveMenorCombustivel(FilaDeEspera fila) {
+        List<Aeronave> filaPoucoCombustivel = new LinkedList<Aeronave>();
+        for (Aeronave a : fila.getFila()) {
+            if (a.getCombustivel() < 6) {
+                filaPoucoCombustivel.add(a);
+            }
+        }
+
+        if (filaPoucoCombustivel.isEmpty())
+            return null;
+
+        filaPoucoCombustivel.sort((a1, a2) -> a1.getCombustivel() - a2.getCombustivel());
+
+        if(!clima.equals(Clima.Sol.toString()))
+            filaPoucoCombustivel.sort((a1, a2) -> Boolean.compare(a1.getPassageiroEspecial(), a2.getPassageiroEspecial()));
+
+        System.out.println("TESTETETESTSETESTs: ");
+        System.out.println(filaPoucoCombustivel);
+
+        return filaPoucoCombustivel.get(0);
     }
 
     public void decolagem() {
@@ -445,6 +572,7 @@ public class Aeroporto {
                         "Aeronave " + pista1.getFilaDecolagem().getFila().peek().getId() + " decolando na pista 1.");
                 somarTempoEsperaTotalTodasAeronavesSairam(pista1.getFilaDecolagem().getFila().peek().getTempoEspera());
                 pista1.getFilaDecolagem().removerAeronave();
+                pista1.getFilaDecolagem().setQtdAeronavesDecolaram(pista1.getFilaDecolagem().getQtdAeronavesDecolaram() + 1);
                 qntTotalAeronavesSairam++;
             }
         }
@@ -459,6 +587,7 @@ public class Aeroporto {
                         "Aeronave " + pista2.getFilaDecolagem().getFila().peek().getId() + " decolando na pista 2.");
                 somarTempoEsperaTotalTodasAeronavesSairam(pista2.getFilaDecolagem().getFila().peek().getTempoEspera());
                 pista2.getFilaDecolagem().removerAeronave();
+                pista2.getFilaDecolagem().setQtdAeronavesDecolaram(pista2.getFilaDecolagem().getQtdAeronavesDecolaram() + 1);
                 qntTotalAeronavesSairam++;
             }
         }
@@ -473,6 +602,7 @@ public class Aeroporto {
                         "Aeronave " + pista3.getFilaDecolagem().getFila().peek().getId() + " decolando na pista 3.");
                 somarTempoEsperaTotalTodasAeronavesSairam(pista3.getFilaDecolagem().getFila().peek().getTempoEspera());
                 pista3.getFilaDecolagem().removerAeronave();
+                pista3.getFilaDecolagem().setQtdAeronavesDecolaram(pista3.getFilaDecolagem().getQtdAeronavesDecolaram() + 1);
                 qntTotalAeronavesSairam++;
             }
         }
@@ -595,6 +725,10 @@ public class Aeroporto {
 
     public String getClima() {
         return clima;
+    }
+
+    public void setQntAterrissagemEmergencial(int qntAterrissagemEmergencial) {
+        this.qtdAterrissagemEmergencial = qntAterrissagemEmergencial;
     }
 
     public int getQtdAterrissagemEmergencial(){

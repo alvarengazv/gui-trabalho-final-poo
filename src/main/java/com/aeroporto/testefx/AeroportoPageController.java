@@ -301,7 +301,7 @@ public class AeroportoPageController implements Initializable, Disposable {
     public void alertaEmergencia() {
         stage = (Stage) anchorPaneInicial.getScene().getWindow();;
 
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(stage);
         alert.setTitle("Alerta");
         alert.setHeaderText("Aeroporto em estado crítico!");

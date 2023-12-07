@@ -18,17 +18,10 @@
       </ImageView>
       <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#3e4e40" height="76.0" layoutX="58.0" layoutY="100.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="381.0" />
       <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="44.0" layoutX="60.0" layoutY="197.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="292.0" />
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="44.0" layoutX="60.0" layoutY="265.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="292.0" />
       <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="44.0" layoutX="60.0" layoutY="334.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="292.0" />
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#899b50" height="30.0" layoutX="373.0" layoutY="204.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="43.0" />
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#899b50" height="30.0" layoutX="373.0" layoutY="272.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="43.0" />
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#899b50" height="30.0" layoutX="373.0" layoutY="341.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="43.0" />
       <Label fx:id="labelInfo1" alignment="CENTER" contentDisplay="CENTER" layoutX="97.0" layoutY="208.0" text="TEMPO MÉDIO DE ESPERA:" textFill="#3e4e40">
-         <font>
-            <Font name="Merriweather Regular" size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="labelInfo2" layoutX="70.0" layoutY="276.0" text="ATERRISSAGENS EMERGENCIAIS:" textFill="#3e4e40">
          <font>
             <Font name="Merriweather Regular" size="16.0" />
          </font>
@@ -39,11 +32,6 @@
          </font>
       </Label>
       <Label fx:id="tempoMedioEspera" alignment="CENTER" layoutX="373.0" layoutY="211.0" prefHeight="17.0" prefWidth="43.0" text="0" textFill="#3e4e40">
-         <font>
-            <Font name="Merriweather Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="qtdAterrissagensEmergenciais" alignment="CENTER" layoutX="373.0" layoutY="279.0" prefHeight="17.0" prefWidth="43.0" text="0" textFill="#3e4e40">
          <font>
             <Font name="Merriweather Bold" size="12.0" />
          </font>
@@ -80,5 +68,21 @@
             <Font name="Merriweather Bold" size="18.0" />
          </font>
       </Label>
+      <Pane fx:id="aterrissagemEmegencial" layoutX="60.0" layoutY="265.0" prefHeight="44.0" prefWidth="358.0">
+         <children>
+            <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#c5cecf" height="44.0" layoutX="1.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="292.0" />
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#899b50" height="30.0" layoutX="314.0" layoutY="7.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="43.0" />
+            <Label fx:id="labelInfo2" alignment="CENTER" layoutX="2.0" layoutY="11.0" prefHeight="22.0" prefWidth="292.0" text="ATERRISSAGENS EMERGENCIAIS:" textFill="#3e4e40">
+               <font>
+                  <Font name="Merriweather Regular" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="qtdAterrissagensEmergenciais" alignment="CENTER" layoutX="314.0" layoutY="14.0" prefHeight="17.0" prefWidth="43.0" text="0" textFill="#3e4e40">
+               <font>
+                  <Font name="Merriweather Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

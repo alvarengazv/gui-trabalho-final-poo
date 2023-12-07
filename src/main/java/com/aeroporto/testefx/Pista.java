@@ -7,6 +7,7 @@ public class Pista {
     private FilaDeEspera filaAterrissagem2;
     private FilaDeEspera filaDecolagem;
     private String nome;
+    private int qtdAterrissagensEmergenciais;
 
     public Pista() {
         this.filaAterrissagem1 = new FilaDeEspera("Fila de Aterrissagem 1");
@@ -51,6 +52,8 @@ public class Pista {
     public FilaDeEspera escolherFilaAterrissagem() {
         if (filaAterrissagem1.tamanho() < filaAterrissagem2.tamanho() || filaAterrissagem2 == null) {
             return filaAterrissagem1;
+        } else if (filaAterrissagem1.tamanho() > filaAterrissagem2.tamanho()) {
+            return filaAterrissagem2;
         } else {
             int count1 = contarPassageirosEspeciais(filaAterrissagem1);
             int count2 = contarPassageirosEspeciais(filaAterrissagem2);
@@ -197,5 +200,13 @@ public class Pista {
             }
         }
         return qtd;
+    }
+
+    public void setQtdAterrissagensEmergenciais(int qtd){
+        this.qtdAterrissagensEmergenciais = qtd;
+    }
+
+    public int getQtdAterrissagensEmergenciais(){
+        return this.qtdAterrissagensEmergenciais;
     }
 }

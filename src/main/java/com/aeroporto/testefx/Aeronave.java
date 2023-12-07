@@ -60,7 +60,7 @@ public class Aeronave {
         this.companhiaAerea = companhiaAerea;
     }
 
-    public boolean getPassageiroEspecial() {
+    public Boolean getPassageiroEspecial() {
         return passageiroEspecial;
     }
 

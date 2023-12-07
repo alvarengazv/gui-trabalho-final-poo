@@ -1,16 +1,11 @@
 package com.aeroporto.testefx;
 
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,7 +38,7 @@ public class ElementosPistaController implements Initializable {
     }
 
     public void abrirFilaAterrissagem2() throws IOException {
-        if(AeroportoPageController.pistaAtual.getNome() == "Pista 3"){
+        if(AeroportoPageController.pistaAtual.getNome().equals("Pista 3")){
             alerta();
             return;
         }
@@ -62,7 +57,7 @@ public class ElementosPistaController implements Initializable {
         labelTitulo.setText("INFORMAÇÕES " + AeroportoPageController.pistaAtual.getNome().toUpperCase() + ":");
         qtdAvioesAterrissagem.setText(String.valueOf(AeroportoPageController.pistaAtual.quantidadeAeronavesAterrissagem()));
         qtdAvioesDecolagem.setText(String.valueOf(AeroportoPageController.pistaAtual.quantidadeAeronavesDecolagem()));
-        //qtdAterrissagensEmergenciais.setText(String.valueOf(AeroportoPageController.pistaAtual.));
+        qtdAterrissagensEmergenciais.setText(String.valueOf(AeroportoPageController.pistaAtual.getQtdAterrissagensEmergenciais()));
         tempoMedioEspera.setText(String.format("%.2f", AeroportoPageController.pistaAtual.recalcularTempoMedioEspera()));
     }
 
