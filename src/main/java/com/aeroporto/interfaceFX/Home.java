@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -27,6 +28,14 @@ public class Home extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            Font.loadFont(this.getClass().getResource("fonts/Merriweather-Black.ttf").toExternalForm(), 10);
+            Font.loadFont(this.getClass().getResource("fonts/Merriweather-BlackItalic.ttf").toExternalForm(), 10);
+            Font.loadFont(this.getClass().getResource("fonts/Merriweather-Bold.ttf").toExternalForm(), 10);
+            Font.loadFont(this.getClass().getResource("fonts/Merriweather-BoldItalic.ttf").toExternalForm(), 10);
+            Font.loadFont(this.getClass().getResource("fonts/Merriweather-Italic.ttf").toExternalForm(), 10);
+            Font.loadFont(this.getClass().getResource("fonts/Merriweather-Light.ttf").toExternalForm(), 10);
+            Font.loadFont(this.getClass().getResource("fonts/Merriweather-LightItalic.ttf").toExternalForm(), 10);
+            Font.loadFont(this.getClass().getResource("fonts/Merriweather-Regular.ttf").toExternalForm(), 10);
             Splash splash = new Splash();
             splash.show();
             Image icone = new Image(getClass().getResource("icons/aeronaveIcone.png").toString());
