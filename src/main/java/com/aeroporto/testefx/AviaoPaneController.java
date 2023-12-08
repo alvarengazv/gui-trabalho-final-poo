@@ -4,8 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.shape.SVGPath;
 
-import java.io.IOException;
-
 public class AviaoPaneController {
     @FXML
     private Label id;
@@ -28,7 +26,7 @@ public class AviaoPaneController {
         passageiroEspecial.setContent(aeronave.getPassageiroEspecial() ? svgV : svgX);
     }
 
-    public void abrirAviao() throws IOException {
+    public void abrirAviao() {
         AeroportoPageController.aeronaveAtual = aeronave;
         AeroportoPageController.voltarParaAviao();
     }

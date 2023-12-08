@@ -1,18 +1,12 @@
 package com.aeroporto.testefx;
 
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,15 +21,13 @@ public class ElementosGeraisController implements Initializable {
     private Label tempoMedioGlobal;
     @FXML
     private AnchorPane anchorPaneInicial;
-    private Pista pista;
-    private Stage stage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
 
-    public void abrirPista1() throws IOException {
+    public void abrirPista1()  {
         if(AeroportoPageController.minutosSimulados == 0){
             alerta();
             return;
@@ -44,7 +36,7 @@ public class ElementosGeraisController implements Initializable {
 
         AeroportoPageController.voltarParaPista();
     }
-    public void abrirPista2() throws IOException {
+    public void abrirPista2() {
         if(AeroportoPageController.minutosSimulados == 0){
             alerta();
             return;
@@ -53,7 +45,7 @@ public class ElementosGeraisController implements Initializable {
 
         AeroportoPageController.voltarParaPista();
     }
-    public void abrirPista3() throws IOException {
+    public void abrirPista3() {
         if(AeroportoPageController.minutosSimulados == 0){
             alerta();
             return;
@@ -71,7 +63,7 @@ public class ElementosGeraisController implements Initializable {
     }
 
     public void alerta(){
-        stage = (Stage) anchorPaneInicial.getScene().getWindow();;
+        Stage stage = (Stage) anchorPaneInicial.getScene().getWindow();
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(stage);

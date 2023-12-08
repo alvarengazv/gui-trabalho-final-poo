@@ -138,14 +138,14 @@ public class Pista {
     }
 
     public double recalcularTempoMedioEspera() {
-        double tempoDeEsperaFilas = 0;
+        double tempoDeEsperaFilas;
         double tempoDeEsperaFila1 = filaAterrissagem1.tempoDeEsperaTotal();
         double tempoDeEsperaFila2 = 0;
         if (filaAterrissagem2 != null)
             tempoDeEsperaFila2 = filaAterrissagem2.tempoDeEsperaTotal();
         double tempoDeEsperaFila3 = filaDecolagem.tempoDeEsperaTotal();
 
-        double qntAeronavesFilas = 0;
+        double qntAeronavesFilas;
         double qntAeronavesFila1 = filaAterrissagem1.tamanho();
         double qntAeronavesFila2 = 0;
         if (filaAterrissagem2 != null)
@@ -163,17 +163,6 @@ public class Pista {
 
         else
             return tempoDeEsperaFilas / qntAeronavesFilas;
-    }
-
-    public void imprimirTempoMedioDeEspera() {
-        System.out.println("O tempo médio de espera desta " + this.nome + " é: " + recalcularTempoMedioEspera());
-    }
-
-    public void verificarCombustivelCritico() {
-        filaAterrissagem1.verificarCombustivelCritico();
-        if (filaAterrissagem2 != null)
-            filaAterrissagem2.verificarCombustivelCritico();
-        filaDecolagem.verificarCombustivelCritico();
     }
 
     public void imprimir() {

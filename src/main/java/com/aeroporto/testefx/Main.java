@@ -2,14 +2,13 @@ package com.aeroporto.testefx;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
     static Aeroporto aeroporto = new Aeroporto();
     static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) {
         int escolha = 0;
 
         while (escolha != 3) {
@@ -43,7 +42,7 @@ public class Main {
         System.out.println("3 - Sair");
     }
 
-    public static void iniciar(boolean arquivo) throws FileNotFoundException {
+    public static void iniciar(boolean arquivo) {
         if (arquivo) {
             leituraArquivoAeronaves(new File("src/main/java/com/aeroporto/testefx/aeronaves.txt"));
         } else {
@@ -75,7 +74,7 @@ public class Main {
         }
     }
 
-    public static void leituraArquivoAeronaves(File arquivo) throws FileNotFoundException {
+    public static void leituraArquivoAeronaves(File arquivo) {
         System.out.println("Lendo arquivo de aeronaves.");
         try {
             Scanner arqScanner = new Scanner(arquivo);

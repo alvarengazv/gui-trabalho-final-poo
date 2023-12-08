@@ -1,7 +1,9 @@
 package com.aeroporto.testefx;
 
-import javafx.animation.*;
-import javafx.event.EventHandler;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,7 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -35,7 +36,6 @@ public class CapaController implements Initializable {
     @FXML
     private AnchorPane anchorPaneInicial;
     private Stage stage;
-    private Scene scene;
 
     private boolean isMenu = false;
     private double xOffset = 0, yOffset = 0;
@@ -62,26 +62,12 @@ public class CapaController implements Initializable {
     }
 
     public void fecharPagina(){
-        stage = (Stage) anchorPaneInicial.getScene().getWindow();;
+        stage = (Stage) anchorPaneInicial.getScene().getWindow();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.initOwner(stage);
         alert.setTitle("Fechando");
         alert.setHeaderText("Você tem certeza de que deseja sair do programa?");
-
-        if(alert.showAndWait().get() == ButtonType.OK){
-            System.out.println("Saiu do programa.");
-            System.exit(0);
-        }
-    }
-
-    public void alerta(){
-        stage = (Stage) anchorPaneInicial.getScene().getWindow();;
-
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.initOwner(stage);
-        alert.setTitle("ERRO");
-        alert.setHeaderText("AVIÃO CAIU");
 
         if(alert.showAndWait().get() == ButtonType.OK){
             System.out.println("Saiu do programa.");
@@ -153,27 +139,21 @@ public class CapaController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("pages/menuInicial.fxml"));
         stage = (Stage) anchorPaneInicial.getScene().getWindow();
 
-        scene = new Scene(root);
+        Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
 
         stage.setScene(scene);
 
         stage.show();
 
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                xOffset = mouseEvent.getSceneX();
-                yOffset = mouseEvent.getSceneY();
-            }
+        root.setOnMousePressed(mouseEvent -> {
+            xOffset = mouseEvent.getSceneX();
+            yOffset = mouseEvent.getSceneY();
         });
 
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                stage.setX(mouseEvent.getScreenX() - xOffset);
-                stage.setY(mouseEvent.getScreenY() - yOffset);
-            }
+        root.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xOffset);
+            stage.setY(mouseEvent.getScreenY() - yOffset);
         });
 
         stage.setOnCloseRequest(eventC -> {

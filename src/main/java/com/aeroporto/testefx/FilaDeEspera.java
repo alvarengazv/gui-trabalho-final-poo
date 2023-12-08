@@ -7,7 +7,6 @@ import java.util.LinkedList;
 public class FilaDeEspera {
 
     private Queue<Aeronave> fila;
-    private int qtdAvioes = 0;
     private double tempoMedioDeEspera = 0;
     private double tempoDeEsperaTotal = 0;
     private String nome;
@@ -67,8 +66,8 @@ public class FilaDeEspera {
         tempoDeEsperaTotal += aeronave.getTempoEspera();
     }
 
-    public Aeronave removerAeronave() {
-        return fila.poll();
+    public void removerAeronave() {
+        fila.poll();
     }
 
     public int tamanho() {
@@ -129,11 +128,6 @@ public class FilaDeEspera {
             }
         }
         return qtdAeronavesCombustivelCritico;
-    }
-
-    public void imprimirQtd() {
-        qtdAvioes = fila.size();
-        System.out.println("O número de aviões na fila eh: " + qtdAvioes);
     }
 
     public void setQtdAterrissagensEmergenciais(int qtd){

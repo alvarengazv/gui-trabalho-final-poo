@@ -1,23 +1,14 @@
 package com.aeroporto.testefx;
 
-import javafx.animation.FadeTransition;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -47,17 +38,16 @@ public class ElementosFilaController implements Initializable {
     private ListView<Pane> listViewAvioes;
     public static Map<Integer, Aeronave> map = new HashMap<>();
 
-    public void abrirAviao() throws IOException {
+    public void abrirAviao() {
         AeroportoPageController.voltarParaAviao();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
     }
 
-    public void montaLista() throws FileNotFoundException {
+    public void montaLista(){
         map.clear();
         listViewAvioes.getItems().clear();
         if(AeroportoPageController.filaAtual.getFila().isEmpty()){
@@ -74,7 +64,7 @@ public class ElementosFilaController implements Initializable {
         for (Aeronave a : AeroportoPageController.filaAtual.getFila()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("pages/aviaoPane.fxml"));
             map.put(a.getId(), a);
-            Pane pane = null;
+            Pane pane;
             try {
                 pane = loader.load();
             } catch (IOException e) {

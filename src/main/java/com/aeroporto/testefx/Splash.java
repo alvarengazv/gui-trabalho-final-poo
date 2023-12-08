@@ -12,14 +12,9 @@ import javafx.scene.shape.*;
 import javafx.util.Duration;
 
 
-/**
- * This is my own splash screen, that I made myself.
- *
- */
 public class Splash
 {
     static Scene splash;
-    static Rectangle rect = new Rectangle();
     final private Pane pane;
     final private SequentialTransition seqT;
 
@@ -48,10 +43,7 @@ public class Splash
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
 
-        // Decrease volume over 5 seconds
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.5), event -> {
-            mediaPlayer.setVolume(mediaPlayer.getVolume() - 0.15);
-        });
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.5), event -> mediaPlayer.setVolume(mediaPlayer.getVolume() - 0.15));
 
         timeline.getKeyFrames().add(keyFrame);
         timeline.play();
@@ -85,7 +77,6 @@ public class Splash
         TranslateTransition translateLine = new TranslateTransition();
         translateLine.setNode(line);
         translateLine.setDuration(Duration.millis(4600));
-//        translateLine.
         translateLine.setToX(515);
 
         FadeTransition fade = new FadeTransition();

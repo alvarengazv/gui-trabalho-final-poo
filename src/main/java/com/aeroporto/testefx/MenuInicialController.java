@@ -1,22 +1,20 @@
 package com.aeroporto.testefx;
 
-import com.almasb.fxgl.multiplayer.ActionEndReplicationEvent;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -25,7 +23,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -39,7 +36,6 @@ public class MenuInicialController implements Initializable {
     private AnchorPane anchorPaneInicial;
 
     private Stage stage;
-    private Scene scene;
     private Parent root;
     private double xOffset = 0;
     private double yOffset = 0;
@@ -110,7 +106,7 @@ public class MenuInicialController implements Initializable {
         }
     }
 
-    public void apagarTudo(ActionEvent event){
+    public void apagarTudo(){
         FadeTransition fade1 = new FadeTransition();
         fade1.setNode(elementosMenu);
         fade1.setDuration(Duration.millis(2000));
@@ -136,7 +132,7 @@ public class MenuInicialController implements Initializable {
 
         pt.setOnFinished(e -> {
             elementosMenu.setVisible(false);
-            mostrarProgresso(event);
+            mostrarProgresso();
         });
     }
 
@@ -146,7 +142,7 @@ public class MenuInicialController implements Initializable {
         isAleatorio = true;
     }
 
-    public void mostrarProgresso(ActionEvent event){
+    public void mostrarProgresso(){
         progressBar.setProgress(0);
         progressBar.setStyle(
                 "-fx-border-radius: 25px; " +
@@ -166,12 +162,9 @@ public class MenuInicialController implements Initializable {
                         progresso += 0.0051;
 
                         double finalProgresso = progresso;
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressBar.setProgress(finalProgresso);
-                                labelProgresso.setText(String.format("%.0f", finalProgresso * 100 > 100 ? 100.00 : (finalProgresso * 100)) + " %");
-                            }
+                        Platform.runLater(() -> {
+                            progressBar.setProgress(finalProgresso);
+                            labelProgresso.setText(String.format("%.0f", finalProgresso * 100 > 100 ? 100.00 : (finalProgresso * 100)) + " %");
                         });
                     }
                 } catch (InterruptedException e) {
@@ -193,7 +186,7 @@ public class MenuInicialController implements Initializable {
                                 aeroportoPageController.setIcone("M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5 M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z");
                                 aeroportoPageController.getAvioesArquivo(selectedFile);
                             }
-                            mudaPage(event);
+                            mudaPage();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -203,38 +196,32 @@ public class MenuInicialController implements Initializable {
         }).start();
     }
 
-    public void iniciar(ActionEvent event) throws IOException {
+    public void iniciar() {
         if(escolhido){
-            apagarTudo(event);
+            apagarTudo();
         } else {
             alerta();
         }
     }
 
-    public void mudaPage(ActionEvent event) throws IOException {
+    public void mudaPage() throws IOException {
         stage = (Stage) anchorPaneInicial.getScene().getWindow();
 
-        scene = new Scene(root);
+        Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
 
         stage.setScene(scene);
 
         stage.show();
 
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                xOffset = mouseEvent.getSceneX();
-                yOffset = mouseEvent.getSceneY();
-            }
+        root.setOnMousePressed(mouseEvent -> {
+            xOffset = mouseEvent.getSceneX();
+            yOffset = mouseEvent.getSceneY();
         });
 
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                stage.setX(mouseEvent.getScreenX() - xOffset);
-                stage.setY(mouseEvent.getScreenY() - yOffset);
-            }
+        root.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xOffset);
+            stage.setY(mouseEvent.getScreenY() - yOffset);
         });
 
         stage.setOnCloseRequest(eventC -> {
@@ -244,7 +231,7 @@ public class MenuInicialController implements Initializable {
     }
 
     public void alerta(){
-        stage = (Stage) anchorPaneInicial.getScene().getWindow();;
+        stage = (Stage) anchorPaneInicial.getScene().getWindow();
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(stage);
@@ -254,7 +241,7 @@ public class MenuInicialController implements Initializable {
     }
 
     public void fecharPagina(){
-        stage = (Stage) anchorPaneInicial.getScene().getWindow();;
+        stage = (Stage) anchorPaneInicial.getScene().getWindow();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.initOwner(stage);

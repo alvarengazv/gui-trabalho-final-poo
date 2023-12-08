@@ -24,8 +24,6 @@ public class ElementosPistaController implements Initializable {
     private Label labelTitulo;
     @FXML
     private AnchorPane anchorPaneInicial;
-    private FilaDeEspera fila;
-    private Stage stage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,7 +60,7 @@ public class ElementosPistaController implements Initializable {
     }
 
     public void alerta(){
-        stage = (Stage) anchorPaneInicial.getScene().getWindow();;
+        Stage stage = (Stage) anchorPaneInicial.getScene().getWindow();
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(stage);
