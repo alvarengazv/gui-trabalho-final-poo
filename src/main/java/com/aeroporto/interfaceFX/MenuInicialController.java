@@ -1,4 +1,4 @@
-package com.aeroporto.testefx;
+package com.aeroporto.interfaceFX;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;

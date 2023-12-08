@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPaneInicial" prefHeight="510.0" prefWidth="1280.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aeroporto.testefx.ElementosAviaoController">
+<AnchorPane fx:id="anchorPaneInicial" prefHeight="510.0" prefWidth="1280.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aeroporto.interfaceFX.ElementosAviaoController">
    <children>
       <Pane fx:id="infoPistas" layoutX="157.0" layoutY="57.0" prefHeight="396.0" prefWidth="966.0">
          <children>

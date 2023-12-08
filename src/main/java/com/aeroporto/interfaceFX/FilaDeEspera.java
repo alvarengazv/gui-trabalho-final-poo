@@ -1,4 +1,4 @@
-package com.aeroporto.testefx;
+package com.aeroporto.interfaceFX;
 
 import java.util.Queue;
 import java.util.LinkedList;

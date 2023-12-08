@@ -1,4 +1,4 @@
-package com.aeroporto.testefx;
+package com.aeroporto.interfaceFX;
 
 import javafx.animation.*;
 import javafx.scene.Scene;

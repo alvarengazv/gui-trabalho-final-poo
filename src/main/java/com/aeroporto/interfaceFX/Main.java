@@ -1,4 +1,4 @@
-package com.aeroporto.testefx;
+package com.aeroporto.interfaceFX;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,7 +44,7 @@ public class Main {
 
     public static void iniciar(boolean arquivo) {
         if (arquivo) {
-            leituraArquivoAeronaves(new File("src/main/java/com/aeroporto/testefx/aeronaves.txt"));
+            leituraArquivoAeronaves(new File("src/main/java/com/aeroporto/interfaceFX/aeronaves.txt"));
         } else {
             aeronavesAleatorias();
         }

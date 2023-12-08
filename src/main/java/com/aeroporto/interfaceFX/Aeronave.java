@@ -1,4 +1,4 @@
-package com.aeroporto.testefx;
+package com.aeroporto.interfaceFX;
 public class Aeronave {
     private static int proximo_id = 1;
 

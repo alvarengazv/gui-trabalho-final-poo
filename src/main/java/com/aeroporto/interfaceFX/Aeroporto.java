@@ -1,4 +1,4 @@
-package com.aeroporto.testefx;
+package com.aeroporto.interfaceFX;
 
 import java.util.*;
 
@@ -66,6 +66,9 @@ public class Aeroporto {
         aterrissagem1 = false;
         aterrissagem2 = false;
         aterrissagem3 = false;
+        acoes = new String[3];
+        filas = new String[3];
+        avioes = new int[3];
 
         System.out.println("Simulando minuto...");
         this.minutosSimulados++;
@@ -101,6 +104,9 @@ public class Aeroporto {
         aterrissagem1 = false;
         aterrissagem2 = false;
         aterrissagem3 = false;
+        acoes = new String[3];
+        filas = new String[3];
+        avioes = new int[3];
 
         System.out.println("Simulando minuto...");
         this.minutosSimulados++;
@@ -325,36 +331,44 @@ public class Aeroporto {
 
         System.out.println("Gerando aeronaves...");
 
-        int aeronavesAterrissagem = random.nextInt(13);
-        chegaramAterrissagem = aeronavesAterrissagem;
+        if(!filaAeronavesAterrissagemArquivo.isEmpty()) {
+            int aeronavesAterrissagem = random.nextInt(13);
+            chegaramAterrissagem = aeronavesAterrissagem;
 
-        if (filaAeronavesAterrissagemArquivo.size() < aeronavesAterrissagem) {
-            aeronavesAterrissagem = filaAeronavesAterrissagemArquivo.size();
-        }
+            if (filaAeronavesAterrissagemArquivo.size() < aeronavesAterrissagem) {
+                aeronavesAterrissagem = filaAeronavesAterrissagemArquivo.size();
+            }
 
-        System.out.println("\nATERRISSAGEM : \nChegando " + aeronavesAterrissagem + " aeronaves para aterrissagem...");
-        for (int i = 0; i < aeronavesAterrissagem; i++) {
-            Aeronave aeronave = filaAeronavesAterrissagemArquivo.peek();
-            filaAeronavesAterrissagemArquivo.remove();
-            System.out.println("\nAviao " + (aeronave != null ? aeronave.getId() : 0) + " de aterrissagem.");
-            adicionarAeronaveFilaAterrisagem(aeronave);
+            System.out.println("\nATERRISSAGEM : \nChegando " + aeronavesAterrissagem + " aeronaves para aterrissagem...");
+            for (int i = 0; i < aeronavesAterrissagem; i++) {
+                Aeronave aeronave = filaAeronavesAterrissagemArquivo.peek();
+                filaAeronavesAterrissagemArquivo.remove();
+                System.out.println("\nAviao " + (aeronave != null ? aeronave.getId() : 0) + " de aterrissagem.");
+                adicionarAeronaveFilaAterrisagem(aeronave);
+            }
+        } else {
+            chegaramAterrissagem = 0;
         }
 
         System.out.print("-------------");
 
-        int aeronavesDecolagem = random.nextInt(9);
-        chegaramDecolagem = aeronavesDecolagem;
+        if(!filaAeronavesDecolagemArquivo.isEmpty()) {
+            int aeronavesDecolagem = random.nextInt(9);
+            chegaramDecolagem = aeronavesDecolagem;
 
-        if (filaAeronavesDecolagemArquivo.size() < aeronavesDecolagem) {
-            aeronavesDecolagem = filaAeronavesDecolagemArquivo.size();
-        }
+            if (filaAeronavesDecolagemArquivo.size() < aeronavesDecolagem) {
+                aeronavesDecolagem = filaAeronavesDecolagemArquivo.size();
+            }
 
-        System.out.println("\nDECOLAGEM : \n" + "Chegando " + aeronavesDecolagem + " aeronaves para decolagem...");
-        for (int i = 0; i < aeronavesDecolagem; i++) {
-            Aeronave aeronave = filaAeronavesDecolagemArquivo.peek();
-            filaAeronavesDecolagemArquivo.remove();
-            System.out.println("\nAviao " + (aeronave != null ? aeronave.getId() : 0) + " de decolagem.");
-            adicionarAeronaveFilaDecolagem(aeronave);
+            System.out.println("\nDECOLAGEM : \n" + "Chegando " + aeronavesDecolagem + " aeronaves para decolagem...");
+            for (int i = 0; i < aeronavesDecolagem; i++) {
+                Aeronave aeronave = filaAeronavesDecolagemArquivo.peek();
+                filaAeronavesDecolagemArquivo.remove();
+                System.out.println("\nAviao " + (aeronave != null ? aeronave.getId() : 0) + " de decolagem.");
+                adicionarAeronaveFilaDecolagem(aeronave);
+            }
+        } else {
+            chegaramDecolagem = 0;
         }
 
         System.out.println("Aeronaves lidas com sucesso!");

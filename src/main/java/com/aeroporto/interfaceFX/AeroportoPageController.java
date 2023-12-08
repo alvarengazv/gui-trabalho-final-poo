@@ -1,4 +1,4 @@
-package com.aeroporto.testefx;
+package com.aeroporto.interfaceFX;
 
 import com.almasb.fxgl.core.Disposable;
 import javafx.animation.FadeTransition;
