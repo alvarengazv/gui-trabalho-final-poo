@@ -25,7 +25,7 @@ public class Aeroporto {
 
     public static int auxContQntAeronavesFilaDecolagem = 0;
 
-    private double qntTotalAeronavesSairam = 0;
+    private int qntTotalAeronavesSairam = 0;
 
     public static double tempoEsperaTotalTodasAeronavesSairam = 0;
 
@@ -82,7 +82,7 @@ public class Aeroporto {
         imprimirInformacoes();
 
         System.out.println("-------------");
-        System.out.println("Aviaoes saindo: ");
+        System.out.println("Avioes saindo: ");
         aterrissagem();
         decolagem();
 
@@ -165,11 +165,8 @@ public class Aeroporto {
     public Pista escolherPistaAterrissagem() {
         if (pista1.quantidadeAeronavesAterrissagem() <= pista2.quantidadeAeronavesAterrissagem()) {
             return pista1;
-        } else if (pista1.quantidadeAeronavesAterrissagem() > pista2.quantidadeAeronavesAterrissagem()) {
+        } else
             return pista2;
-        } else {
-            return pista2;
-        }
     }
 
     public Pista escolherPistaDecolagem() {
@@ -206,7 +203,7 @@ public class Aeroporto {
                 System.out.println("Aeronave " + aeronave.getId() + " caiu por falta de combustivel.");
                 aeronavesCairam.add(aeronave);
                 pista3.getFilaAterrissagem1().getFila().remove(aeronave);
-            } else if (aeronave.getCombustivel() < 3) {
+            } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
             }
         }
@@ -217,7 +214,7 @@ public class Aeroporto {
                 System.out.println("Aeronave " + aeronave.getId() + " caiu por falta de combustivel.");
                 aeronavesCairam.add(aeronave);
                 pista1.getFilaAterrissagem1().getFila().remove(aeronave);
-            } else if (aeronave.getCombustivel() < 3) {
+            } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
                 pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
                 pista1.getFilaAterrissagem1().getFila().remove(aeronave);
@@ -230,7 +227,7 @@ public class Aeroporto {
                 System.out.println("Aeronave " + aeronave.getId() + " caiu por falta de combustivel.");
                 aeronavesCairam.add(aeronave);
                 pista1.getFilaAterrissagem2().getFila().remove(aeronave);
-            } else if (aeronave.getCombustivel() < 3) {
+            } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
                 pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
                 pista1.getFilaAterrissagem2().getFila().remove(aeronave);
@@ -243,7 +240,7 @@ public class Aeroporto {
                 System.out.println("Aeronave " + aeronave.getId() + " caiu por falta de combustivel.");
                 aeronavesCairam.add(aeronave);
                 pista2.getFilaAterrissagem1().getFila().remove(aeronave);
-            } else if (aeronave.getCombustivel() < 3) {
+            } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
                 pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
                 pista2.getFilaAterrissagem1().getFila().remove(aeronave);
@@ -255,7 +252,7 @@ public class Aeroporto {
                 System.out.println("Aeronave " + aeronave.getId() + " caiu por falta de combustivel.");
                 aeronavesCairam.add(aeronave);
                 pista2.getFilaAterrissagem2().getFila().remove(aeronave);
-            } else if (aeronave.getCombustivel() < 3) {
+            } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
                 pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
                 pista2.getFilaAterrissagem2().getFila().remove(aeronave);
@@ -282,6 +279,7 @@ public class Aeroporto {
 
         int aeronavesAterrissagem = random.nextInt(13);
         chegaramAterrissagem = aeronavesAterrissagem;
+
         System.out.println("\nATERRISSAGEM : \nChegando " + aeronavesAterrissagem + " aeronaves para aterrissagem...");
 
         for (int i = 0; i < aeronavesAterrissagem; i++) {
@@ -306,7 +304,9 @@ public class Aeroporto {
 
         int aeronavesDecolagem = random.nextInt(9);
         chegaramDecolagem = aeronavesDecolagem;
+
         System.out.println("\nDECOLAGEM : \n" + "Chegando " + aeronavesDecolagem + " aeronaves para decolagem...");
+
         for (int i = 0; i < aeronavesDecolagem; i++) {
             System.out.println("\nAviao " + idsAeronavesDecolagem + " de decolagem.");
             int numPassageiros = random.nextInt(380) + 1;
@@ -393,7 +393,7 @@ public class Aeroporto {
         }
 
         if (filaPoucoCombustivel1.isEmpty() && filaPoucoCombustivel2.isEmpty()) {
-            return true;
+            return false;
         } else if (filaPoucoCombustivel1.isEmpty()) {
             return false;
         } else if (filaPoucoCombustivel2.isEmpty()) {
@@ -438,7 +438,7 @@ public class Aeroporto {
         if (pista1.getFilaAterrissagem2().getFila().isEmpty()) {
             System.out.println("Não há aeronaves na fila de aterrissagem 2 da pista 1.");
         }
-        if (!pista1.getFilaAterrissagem1().getFila().isEmpty() && !pista1.getFilaAterrissagem2().getFila().isEmpty()) {
+        if (!pista1.getFilaAterrissagem1().getFila().isEmpty() || !pista1.getFilaAterrissagem2().getFila().isEmpty()) {
             if (escolherFilaParaAterrissar(pista1.getFilaAterrissagem1(), pista1.getFilaAterrissagem2())) {
                 Aeronave a = null;
 
@@ -474,7 +474,7 @@ public class Aeroporto {
 
                     pista1.getFilaAterrissagem1().removerAeronave();
                 }
-                filas[0] = pista1.getFilaAterrissagem2().getNome();
+                filas[0] = pista1.getFilaAterrissagem1().getNome();
 
                 aterrissagem1 = true;
                 qntTotalAeronavesSairam++;
@@ -509,7 +509,7 @@ public class Aeroporto {
                     avioes[0] = pista1.getFilaAterrissagem2().getFila().peek().getId();
                     acoes[0] = "aterrissou";
 
-                    System.out.println("Aeronave " + pista1.getFilaAterrissagem1().getFila().peek().getId() + " aterrissando na pista 1 da fila 1.");
+                    System.out.println("Aeronave " + pista1.getFilaAterrissagem2().getFila().peek().getId() + " aterrissando na pista 1 da fila 1.");
                     pista1.getFilaAterrissagem2().removerAeronave();
                 }
                 filas[0] = pista1.getFilaAterrissagem2().getNome();
@@ -527,7 +527,7 @@ public class Aeroporto {
         if (pista2.getFilaAterrissagem2().getFila().isEmpty()) {
             System.out.println("Não há aeronaves na fila de aterrissagem 2 da pista 2.");
         }
-        if (!pista2.getFilaAterrissagem1().getFila().isEmpty() && !pista2.getFilaAterrissagem2().getFila().isEmpty()) {
+        if (!pista2.getFilaAterrissagem1().getFila().isEmpty() || !pista2.getFilaAterrissagem2().getFila().isEmpty()) {
             if (escolherFilaParaAterrissar(pista2.getFilaAterrissagem1(), pista2.getFilaAterrissagem2())) {
                 Aeronave a = null;
 
@@ -765,7 +765,7 @@ public class Aeroporto {
         return tempoEsperaTotalTodasAeronavesAtuais() + tempoEsperaTotalTodasAeronavesSairam;
     }
 
-    public double qntTotalAeronaves() {
+    public int qntTotalAeronaves() {
         return pista1.quantidadeAeronaves() + pista2.quantidadeAeronaves() + pista3.quantidadeAeronaves() + qntTotalAeronavesSairam;
     }
 
@@ -778,32 +778,23 @@ public class Aeroporto {
     }
 
     public void imprimirTempoMedioDeEspera() {
-        System.out.println("Tempo medio pista 1: " + pista1.recalcularTempoMedioEspera());
-        System.out.println("Tempo medio da fila 1: " + pista1.getFilaAterrissagem1().tempoMedioDeEsperaFila());
-        System.out.println("Tempo medio da fila 2: " + pista1.getFilaAterrissagem2().tempoMedioDeEsperaFila());
-        System.out.println("Tempo medio da fila 3: " + pista1.getFilaDecolagem().tempoMedioDeEsperaFila());
+        System.out.println("Tempo medio pista 1: " + String.format("%.2f", pista1.recalcularTempoMedioEspera()));
+        System.out.println("Tempo medio da fila 1: " + String.format("%.2f", pista1.getFilaAterrissagem1().tempoMedioDeEsperaFila()));
+        System.out.println("Tempo medio da fila 2: " + String.format("%.2f", pista1.getFilaAterrissagem2().tempoMedioDeEsperaFila()));
+        System.out.println("Tempo medio da fila 3: " + String.format("%.2f", pista1.getFilaDecolagem().tempoMedioDeEsperaFila()));
 
-        System.out.println("\nTempo medio pista 2: " + pista2.recalcularTempoMedioEspera());
-        System.out.println("Tempo medio da fila 1: " + pista2.getFilaAterrissagem1().tempoMedioDeEsperaFila());
-        System.out.println("Tempo medio da fila 2: " + pista2.getFilaAterrissagem2().tempoMedioDeEsperaFila());
-        System.out.println("Tempo medio da fila 3: " + pista2.getFilaDecolagem().tempoMedioDeEsperaFila());
+        System.out.println("\nTempo medio pista 2: " + String.format("%.2f", pista2.recalcularTempoMedioEspera()));
+        System.out.println("Tempo medio da fila 1: " + String.format("%.2f", pista2.getFilaAterrissagem1().tempoMedioDeEsperaFila()));
+        System.out.println("Tempo medio da fila 2: " + String.format("%.2f", pista2.getFilaAterrissagem2().tempoMedioDeEsperaFila()));
+        System.out.println("Tempo medio da fila 3: " + String.format("%.2f", pista2.getFilaDecolagem().tempoMedioDeEsperaFila()));
 
-        System.out.println("\nTempo medio pista 3: " + pista3.recalcularTempoMedioEspera());
-        System.out.println("Tempo medio da fila 1: " + pista3.getFilaAterrissagem1().tempoMedioDeEsperaFila());
-        System.out.println("Tempo medio da fila 3: " + pista3.getFilaDecolagem().tempoMedioDeEsperaFila());
+        System.out.println("\nTempo medio pista 3: " + String.format("%.2f", pista3.recalcularTempoMedioEspera()));
+        System.out.println("Tempo medio da fila 1: " + String.format("%.2f", pista3.getFilaAterrissagem1().tempoMedioDeEsperaFila()));
+        System.out.println("Tempo medio da fila 3: " + String.format("%.2f", pista3.getFilaDecolagem().tempoMedioDeEsperaFila()));
 
-        qntTotalAeronaves();
-
-        if (tempoEsperaTotalTodasAeronaves() == 0 || qntTotalAeronavesSairam == 0) {
-            System.out.println("\nTempo total de espera de todas as aeronaves: 0");
-            System.out.println("Total de naves: 0");
-            System.out.println("Tempo medio de espera de todas as aeronaves: 0");
-        } else {
-            System.out.println("\nTempo total de espera de todas as aeronaves: " + tempoEsperaTotalTodasAeronaves());
-            System.out.println("Total de naves: " + qntTotalAeronaves());
-            System.out.println("Tempo medio de espera de todas as aeronaves: " + tempoMedioTotal());
-        }
-
+        System.out.println("\nTempo total de espera de todas as aeronaves: " + String.format("%.2f", tempoEsperaTotalTodasAeronaves()));
+        System.out.println("Total de naves: " + qntTotalAeronaves());
+        System.out.println("Tempo medio de espera de todas as aeronaves: " + String.format("%.2f", tempoMedioTotal()));
     }
 
     public void imprimirInformacoes() {

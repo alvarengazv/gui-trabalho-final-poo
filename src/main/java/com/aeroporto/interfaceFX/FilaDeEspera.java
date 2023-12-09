@@ -103,7 +103,7 @@ public class FilaDeEspera {
 
     public void imprimirFila() {
         System.out.println(this.nome + ": " + fila.size());
-        System.out.println("O tempo médio de espera desta " + this.nome + " eh: " + tempoMedioDeEsperaFila());
+        System.out.println("O tempo médio de espera desta " + this.nome + " eh: " + String.format("%.2f", tempoMedioDeEsperaFila()));
         for (Aeronave a : fila) {
             a.imprimirAeronave();
         }

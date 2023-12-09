@@ -182,15 +182,17 @@ public class AeroportoPageController implements Initializable, Disposable {
         alert.showAndWait();
 
         if(!Aeroporto.aeronavesCairam.isEmpty()){
+            int quantidadePassageiros = 0;
 
             StringBuilder contentBuilder = new StringBuilder();
             for (Aeronave aeronave : Aeroporto.aeronavesCairam) {
                 contentBuilder.append("A aeronave ").append(aeronave.getId()).append(" caiu por falta de combustível.\n");
+                quantidadePassageiros += aeronave.getNumPassageiros();
             }
             content = contentBuilder.toString();
 
             alert.setHeaderText("Aeronaves que Caíram");
-            alert.setContentText(content);
+            alert.setContentText(content + "\n#LUTO pelos " + quantidadePassageiros + " passageiros que se foram.");
 
             alert.showAndWait();
         }
