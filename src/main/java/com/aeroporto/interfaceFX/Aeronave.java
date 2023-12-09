@@ -1,18 +1,16 @@
 package com.aeroporto.interfaceFX;
 public class Aeronave {
-    private static int proximo_id = 1;
-
     private int id;
     private int combustivel;
     private int tempoEspera;
     private int numPassageiros;
     private String companhiaAerea;
     private boolean passageiroEspecial;
+    private Pista pista;
+    private FilaDeEspera fila;
 
     public Aeronave(int numPassageiros, int tempoEspera, int combustivel, String companhiaAerea,
             boolean passageiroEspecial) {
-        this.id = proximo_id;
-        proximo_id += 2;
         this.numPassageiros = numPassageiros;
         this.tempoEspera = tempoEspera;
         this.combustivel = combustivel;
@@ -91,5 +89,21 @@ public class Aeronave {
     public void imprimirAeronave() {
         System.out.println("ID: " + this.id + " - Combustível: " + this.combustivel + " - Tempo de espera: "
                 + this.tempoEspera + " - Passageiro especial: " + this.passageiroEspecial);
+    }
+
+    public void setPista(Pista pista){
+        this.pista = pista;
+    }
+
+    public Pista getPista(){
+        return this.pista;
+    }
+
+    public void setFila(FilaDeEspera fila){
+        this.fila = fila;
+    }
+
+    public FilaDeEspera getFila(){
+        return this.fila;
     }
 }

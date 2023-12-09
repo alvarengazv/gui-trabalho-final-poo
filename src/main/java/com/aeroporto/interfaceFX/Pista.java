@@ -1,5 +1,7 @@
 package com.aeroporto.interfaceFX;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Pista {
 
@@ -176,18 +178,23 @@ public class Pista {
 
     public int getQtdAeronavesEmergencia(){
         int qtd = 0;
+
         for(Aeronave a : filaAterrissagem1.getFila()){
             if(a.verificarCombustivelCritico()){
+                Aeroporto.aeronavesEmEmergencia.add(a);
                 qtd++;
             }
         }
+
         if(filaAterrissagem2 != null){
             for(Aeronave a : filaAterrissagem2.getFila()){
                 if(a.verificarCombustivelCritico()){
+                    Aeroporto.aeronavesEmEmergencia.add(a);
                     qtd++;
                 }
             }
         }
+
         return qtd;
     }
 

@@ -30,6 +30,7 @@ public class Aeroporto {
     public static double tempoEsperaTotalTodasAeronavesSairam = 0;
 
     public static List<Aeronave> aeronavesCairam = new ArrayList<>();
+    public static List<Aeronave> aeronavesEmEmergencia = new ArrayList<>();
     public static int chegaramAterrissagem = 0;
     public static int chegaramDecolagem = 0;
     public static String[] acoes = new String[3];
@@ -149,16 +150,20 @@ public class Aeroporto {
     public void adicionarAeronaveFilaAterrisagem(Aeronave aeronave) {
         Pista pistaEscolhida = escolherPistaAterrissagem();
         System.out.println("Pista escolhida: " + pistaEscolhida.getNome());
+        aeronave.setPista(pistaEscolhida);
         FilaDeEspera filaEscolhida = pistaEscolhida.escolherFilaAterrissagem();
         System.out.println("Fila escolhida: " + filaEscolhida.getNome());
+        aeronave.setFila(filaEscolhida);
         filaEscolhida.adicionarAeronave(aeronave);
     }
 
     public void adicionarAeronaveFilaDecolagem(Aeronave aeronave) {
         Pista pistaEscolhida = escolherPistaDecolagem();
         System.out.println("Pista escolhida: " + pistaEscolhida.getNome());
+        aeronave.setPista(pistaEscolhida);
         FilaDeEspera filaEscolhida = pistaEscolhida.escolherFilaDecolagem();
         System.out.println("Fila escolhida: " + filaEscolhida.getNome());
+        aeronave.setFila(filaEscolhida);
         filaEscolhida.adicionarAeronave(aeronave);
     }
 
@@ -217,6 +222,8 @@ public class Aeroporto {
             } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
                 pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
+                aeronave.setPista(pista3);
+                aeronave.setFila(pista3.getFilaAterrissagem1());
                 pista1.getFilaAterrissagem1().getFila().remove(aeronave);
             }
         }
@@ -230,6 +237,8 @@ public class Aeroporto {
             } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
                 pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
+                aeronave.setPista(pista3);
+                aeronave.setFila(pista3.getFilaAterrissagem1());
                 pista1.getFilaAterrissagem2().getFila().remove(aeronave);
             }
         }
@@ -243,6 +252,8 @@ public class Aeroporto {
             } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
                 pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
+                aeronave.setPista(pista3);
+                aeronave.setFila(pista3.getFilaAterrissagem1());
                 pista2.getFilaAterrissagem1().getFila().remove(aeronave);
             }
         }
@@ -255,6 +266,8 @@ public class Aeroporto {
             } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
                 pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
+                aeronave.setPista(pista3);
+                aeronave.setFila(pista3.getFilaAterrissagem1());
                 pista2.getFilaAterrissagem2().getFila().remove(aeronave);
             }
         }
@@ -855,6 +868,7 @@ public class Aeroporto {
     }
 
     public int getQtdAeronavesEmergencia(){
+        Aeroporto.aeronavesEmEmergencia = new ArrayList<>();
         return pista1.getQtdAeronavesEmergencia() + pista2.getQtdAeronavesEmergencia() + pista3.getQtdAeronavesEmergencia();
     }
 

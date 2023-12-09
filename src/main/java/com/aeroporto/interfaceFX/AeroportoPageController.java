@@ -366,9 +366,16 @@ public class AeroportoPageController implements Initializable, Disposable {
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.initOwner(stage);
-        alert.setTitle("Alerta");
+        alert.setTitle("Alerta de Emergência");
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.setHeaderText("Aeroporto em estado crítico!");
-        alert.setContentText("Há " + aeroporto.getQtdAeronavesEmergencia() + " aeronaves em estado de emergência!");
+        String content = "Há " + aeroporto.getQtdAeronavesEmergencia() + " aeronaves em estado de emergência:\n";
+
+        for (Aeronave aeronave : aeroporto.aeronavesEmEmergencia) {
+            content += "Aeronave " + aeronave.getId() +  " da " + aeronave.getFila().getNome() + " da " + aeronave.getPista().getNome() + ".\n";
+        }
+
+        alert.setContentText(content);
 
         alert.showAndWait();
     }
