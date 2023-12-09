@@ -12,6 +12,8 @@ public class FilaDeEspera {
     private String nome;
     private int qtdAterrissagensEmergenciais;
     private int qtdAeronavesDecolaram;
+    private int qtdAeronavesSairam;
+    private double tempoEsperaAeronavesSairam;
 
     public FilaDeEspera() {
         this.fila = new LinkedList<>();
@@ -75,10 +77,10 @@ public class FilaDeEspera {
     }
 
     public double tempoMedioDeEsperaFila() {
-        if (tempoDeEsperaTotal() == 0 || tamanho() == 0) {
+        if (tempoDeEsperaTotal() + tempoEsperaAeronavesSairam == 0 || tamanho() + qtdAeronavesSairam == 0) {
             return 0;
         } else {
-            return tempoMedioDeEspera = tempoDeEsperaTotal() / tamanho();
+            return tempoMedioDeEspera = tempoDeEsperaTotal() / (tamanho() + getQtdAeronavesSairam());
         }
     }
 
@@ -88,7 +90,7 @@ public class FilaDeEspera {
             tempoDeEsperaTotal += a.getTempoEspera();
         }
 
-        return tempoDeEsperaTotal;
+        return tempoDeEsperaTotal + tempoEsperaAeronavesSairam;
     }
 
     public void verificarCombustivelCritico() {
@@ -136,6 +138,22 @@ public class FilaDeEspera {
 
     public int getQtdAterrissagensEmergenciais(){
         return this.qtdAterrissagensEmergenciais;
+    }
+
+    public void setQtdAeronavesSairam(int qtd){
+        this.qtdAeronavesSairam = qtd;
+    }
+
+    public int getQtdAeronavesSairam(){
+        return this.qtdAeronavesSairam;
+    }
+
+    public void setTempoEsperaAeronavesSairam(double tempo){
+        this.tempoEsperaAeronavesSairam = tempo;
+    }
+
+    public double getTempoEsperaAeronavesSairam(){
+        return this.tempoEsperaAeronavesSairam;
     }
 
 }

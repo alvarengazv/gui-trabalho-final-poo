@@ -141,28 +141,30 @@ public class Pista {
 
     public double recalcularTempoMedioEspera() {
         double tempoDeEsperaFilas;
-        double tempoDeEsperaFila1 = filaAterrissagem1.tempoDeEsperaTotal();
+        double tempoDeEsperaFila1 = filaAterrissagem1.tempoDeEsperaTotal() + filaAterrissagem1.getTempoEsperaAeronavesSairam();
         double tempoDeEsperaFila2 = 0;
+
         if (filaAterrissagem2 != null)
-            tempoDeEsperaFila2 = filaAterrissagem2.tempoDeEsperaTotal();
+            tempoDeEsperaFila2 = filaAterrissagem2.tempoDeEsperaTotal() + filaAterrissagem2.getTempoEsperaAeronavesSairam();
+
         double tempoDeEsperaFila3 = filaDecolagem.tempoDeEsperaTotal();
 
         double qntAeronavesFilas;
-        double qntAeronavesFila1 = filaAterrissagem1.tamanho();
+        double qntAeronavesFila1 = filaAterrissagem1.tamanho() + filaAterrissagem1.getQtdAeronavesSairam();
         double qntAeronavesFila2 = 0;
+
         if (filaAterrissagem2 != null)
-            qntAeronavesFila2 = filaAterrissagem2.tamanho();
-        double qntAeronavesFila3 = filaDecolagem.tamanho();
+            qntAeronavesFila2 = filaAterrissagem2.tamanho() + filaAterrissagem2.getQtdAeronavesSairam();
+
+        double qntAeronavesFila3 = filaDecolagem.tamanho() + filaDecolagem.getQtdAeronavesSairam();
 
         tempoDeEsperaFilas = tempoDeEsperaFila1 + tempoDeEsperaFila2 + tempoDeEsperaFila3;
         qntAeronavesFilas = qntAeronavesFila1 + qntAeronavesFila2 + qntAeronavesFila3;
 
         if (qntAeronavesFilas == 0)
             return 0;
-
         else if (tempoDeEsperaFilas == 0)
             return 0;
-
         else
             return tempoDeEsperaFilas / qntAeronavesFilas;
     }
