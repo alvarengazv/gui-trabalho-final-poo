@@ -161,18 +161,17 @@ public class AeroportoPageController implements Initializable, Disposable {
 
         alert.showAndWait();
 
+        int i = 0;
         content = "";
 
-        if(Aeroporto.avioes[0] != 0 && Aeroporto.filas[0] != null && Aeroporto.acoes[0] != null)
-            content += "A aeronave " + Aeroporto.avioes[0] + " da " + Aeroporto.filas[0] + " da Pista 1 " + Aeroporto.acoes[0] + ".\n";
+        StringBuilder contentBuilder = new StringBuilder();
+        for (Aeronave aeronave : Aeroporto.aeronavesSairam) {
+            contentBuilder.append("A aeronave ").append(aeronave.getId()).append(" da ").append(aeronave.getFila().getNome()).append(" da ").append(aeronave.getPista().getNome()).append(" ").append(Aeroporto.acoes[i]).append(".\n");
+            i++;
+        }
+        content = contentBuilder.toString();
 
-        if(Aeroporto.avioes[1] != 0 && Aeroporto.filas[1] != null && Aeroporto.acoes[1] != null)
-            content += "A aeronave " + Aeroporto.avioes[1] + " da " + Aeroporto.filas[1] + " da Pista 2 " + Aeroporto.acoes[1] + ".\n";
-
-        if(Aeroporto.avioes[2] != 0 && Aeroporto.filas[2] != null && Aeroporto.acoes[2] != null)
-            content += "A aeronave " + Aeroporto.avioes[2] + " da " + Aeroporto.filas[2] + " da Pista 3 " + Aeroporto.acoes[2] + ".\n";
-
-        if(content.isEmpty()){
+        if(Aeroporto.aeronavesSairam.isEmpty()){
             content = "Nenhuma aeronave saiu.";
         }
 
@@ -184,7 +183,7 @@ public class AeroportoPageController implements Initializable, Disposable {
         if(!Aeroporto.aeronavesCairam.isEmpty()){
             int quantidadePassageiros = 0;
 
-            StringBuilder contentBuilder = new StringBuilder();
+            contentBuilder = new StringBuilder();
             for (Aeronave aeronave : Aeroporto.aeronavesCairam) {
                 contentBuilder.append("A aeronave ").append(aeronave.getId()).append(" caiu por falta de combustível.\n");
                 quantidadePassageiros += aeronave.getNumPassageiros();

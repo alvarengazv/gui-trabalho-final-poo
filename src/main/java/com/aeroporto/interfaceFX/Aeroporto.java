@@ -31,11 +31,12 @@ public class Aeroporto {
 
     public static List<Aeronave> aeronavesCairam = new ArrayList<>();
     public static List<Aeronave> aeronavesEmEmergencia = new ArrayList<>();
+    public static List<Aeronave> aeronavesSairam = new ArrayList<>();
     public static int chegaramAterrissagem = 0;
     public static int chegaramDecolagem = 0;
     public static String[] acoes = new String[3];
-    public static String[] filas = new String[3];
-    public static int[] avioes = new int[3];
+    /*public static String[] filas = new String[3];
+    public static int[] avioes = new int[3];*/
 
     enum CompanhiaAerea {
         GOL,
@@ -67,9 +68,10 @@ public class Aeroporto {
         aterrissagem1 = false;
         aterrissagem2 = false;
         aterrissagem3 = false;
+        aeronavesSairam = new ArrayList<>();
         acoes = new String[3];
-        filas = new String[3];
-        avioes = new int[3];
+        /*filas = new String[3];
+        avioes = new int[3];*/
 
         System.out.println("Simulando minuto...");
         this.minutosSimulados++;
@@ -81,6 +83,8 @@ public class Aeroporto {
         }
 
         imprimirInformacoes();
+
+        distribuicaoAeronaves();
 
         System.out.println("-------------");
         System.out.println("Avioes saindo: ");
@@ -105,9 +109,10 @@ public class Aeroporto {
         aterrissagem1 = false;
         aterrissagem2 = false;
         aterrissagem3 = false;
+        aeronavesSairam = new ArrayList<>();
         acoes = new String[3];
-        filas = new String[3];
-        avioes = new int[3];
+        /*filas = new String[3];
+        avioes = new int[3];*/
 
         System.out.println("Simulando minuto...");
         this.minutosSimulados++;
@@ -120,7 +125,7 @@ public class Aeroporto {
 
         imprimirInformacoes();
 
-        reorganizarFilas();
+        distribuicaoAeronaves();
 
         System.out.println("-------------");
         System.out.println("Aviaoes saindo: ");
@@ -139,7 +144,7 @@ public class Aeroporto {
         imprimirSituacaoCombustivel();
     }
 
-    public void reorganizarFilas(){
+    public void distribuicaoAeronaves(){
         if(pista1.quantidadeAeronavesAterrissagem() == 0){
             if(pista3.quantidadeAeronavesAterrissagem() <= 1) {
                 if (pista3.quantidadeAeronaves() > 1 && pista1.quantidadeAeronavesDecolagem() == 0) {
@@ -532,13 +537,13 @@ public class Aeroporto {
                     somarTempoEsperaTotalTodasAeronavesSairam(a.getTempoEspera());
                     pista1.getFilaAterrissagem1().setTempoEsperaAeronavesSairam(pista1.getFilaAterrissagem1().getTempoEsperaAeronavesSairam() + a.getTempoEspera());
 
-                    avioes[0] = a.getId();
+                    aeronavesSairam.add(a);
                     acoes[0] = passageiroEspecial ? "aterrissou com emergência por possuir passageiro com necessidades especiais" : "aterrissou com emergência por combustível baixo";
                 } else {
                     somarTempoEsperaTotalTodasAeronavesSairam(pista1.getFilaAterrissagem1().getFila().peek().getTempoEspera());
                     pista1.getFilaAterrissagem1().setTempoEsperaAeronavesSairam(pista1.getFilaAterrissagem1().getTempoEsperaAeronavesSairam() + pista1.getFilaAterrissagem1().getFila().peek().getTempoEspera());
 
-                    avioes[0] = pista1.getFilaAterrissagem1().getFila().peek().getId();
+                    aeronavesSairam.add(pista1.getFilaAterrissagem1().getFila().peek());
                     acoes[0] = "aterrissou";
 
                     System.out.println("Aeronave " + pista1.getFilaAterrissagem1().getFila().peek().getId()+ " aterrissando na pista 1 da fila 1.");
@@ -546,7 +551,6 @@ public class Aeroporto {
                     pista1.getFilaAterrissagem1().removerAeronave();
                 }
                 pista1.getFilaAterrissagem1().setQtdAeronavesSairam(pista1.getFilaAterrissagem1().getQtdAeronavesSairam() + 1);
-                filas[0] = pista1.getFilaAterrissagem1().getNome();
 
                 aterrissagem1 = true;
                 qntTotalAeronavesSairam++;
@@ -574,20 +578,19 @@ public class Aeroporto {
                     somarTempoEsperaTotalTodasAeronavesSairam(a.getTempoEspera());
                     pista1.getFilaAterrissagem2().setTempoEsperaAeronavesSairam(pista1.getFilaAterrissagem2().getTempoEsperaAeronavesSairam() + a.getTempoEspera());
 
-                    avioes[0] = a.getId();
+                    aeronavesSairam.add(a);
                     acoes[0] = passageiroEspecial ? "aterrissou com emergência por possuir passageiro com necessidades especiais" : "aterrissou com emergência por combustível baixo";
                 } else {
                     somarTempoEsperaTotalTodasAeronavesSairam(pista1.getFilaAterrissagem2().getFila().peek().getTempoEspera());
                     pista1.getFilaAterrissagem2().setTempoEsperaAeronavesSairam(pista1.getFilaAterrissagem2().getTempoEsperaAeronavesSairam() + pista1.getFilaAterrissagem2().getFila().peek().getTempoEspera());
 
-                    avioes[0] = pista1.getFilaAterrissagem2().getFila().peek().getId();
+                    aeronavesSairam.add(pista1.getFilaAterrissagem2().getFila().peek());
                     acoes[0] = "aterrissou";
 
                     System.out.println("Aeronave " + pista1.getFilaAterrissagem2().getFila().peek().getId() + " aterrissando na pista 1 da fila 1.");
                     pista1.getFilaAterrissagem2().removerAeronave();
                 }
                 pista1.getFilaAterrissagem2().setQtdAeronavesSairam(pista1.getFilaAterrissagem2().getQtdAeronavesSairam() + 1);
-                filas[0] = pista1.getFilaAterrissagem2().getNome();
 
                 aterrissagem1 = true;
                 qntTotalAeronavesSairam++;
@@ -626,21 +629,19 @@ public class Aeroporto {
                     somarTempoEsperaTotalTodasAeronavesSairam(a.getTempoEspera());
                     pista2.getFilaAterrissagem1().setTempoEsperaAeronavesSairam(pista2.getFilaAterrissagem1().getTempoEsperaAeronavesSairam() + a.getTempoEspera());
 
-                    avioes[1] = a.getId();
+                    aeronavesSairam.add(a);
                     acoes[1] = passageiroEspecial ? "aterrissou com emergência por possuir passageiro com necessidades especiais" : "aterrissou com emergência por combustível baixo";
                 } else {
                     somarTempoEsperaTotalTodasAeronavesSairam(pista2.getFilaAterrissagem1().getFila().peek().getTempoEspera());
                     pista2.getFilaAterrissagem1().setTempoEsperaAeronavesSairam(pista2.getFilaAterrissagem1().getTempoEsperaAeronavesSairam() + pista2.getFilaAterrissagem1().getFila().peek().getTempoEspera());
 
-                    avioes[1] = pista2.getFilaAterrissagem1().getFila().peek().getId();
+                    aeronavesSairam.add(pista2.getFilaAterrissagem1().getFila().peek());
                     acoes[1] = "aterrissou";
 
                     System.out.println("Aeronave " + pista2.getFilaAterrissagem1().getFila().peek().getId()+ " aterrissando na pista 2 da fila 1.");
                     pista2.getFilaAterrissagem1().removerAeronave();
                 }
                 pista2.getFilaAterrissagem1().setQtdAeronavesSairam(pista2.getFilaAterrissagem1().getQtdAeronavesSairam() + 1);
-
-                filas[1] = pista2.getFilaAterrissagem1().getNome();
 
                 aterrissagem2 = true;
                 qntTotalAeronavesSairam++;
@@ -667,22 +668,20 @@ public class Aeroporto {
                     somarTempoEsperaTotalTodasAeronavesSairam(a.getTempoEspera());
                     pista2.getFilaAterrissagem2().setTempoEsperaAeronavesSairam(pista2.getFilaAterrissagem2().getTempoEsperaAeronavesSairam() + a.getTempoEspera());
 
-                    avioes[1] = a.getId();
+                    aeronavesSairam.add(a);
 
                     acoes[1] = passageiroEspecial ? "aterrissou com emergência por possuir passageiro com necessidades especiais" : "aterrissou com emergência por combustível baixo";
                 } else {
                     somarTempoEsperaTotalTodasAeronavesSairam(pista2.getFilaAterrissagem2().getFila().peek().getTempoEspera());
                     pista2.getFilaAterrissagem2().setTempoEsperaAeronavesSairam(pista2.getFilaAterrissagem2().getTempoEsperaAeronavesSairam() + pista2.getFilaAterrissagem2().getFila().peek().getTempoEspera());
 
-                    avioes[1] = pista2.getFilaAterrissagem2().getFila().peek().getId();
+                    aeronavesSairam.add(pista2.getFilaAterrissagem2().getFila().peek());
                     acoes[1] = "aterrissou";
 
                     System.out.println("Aeronave " + pista2.getFilaAterrissagem2().getFila().peek().getId()+ " aterrissando na pista 2 da fila 2.");
                     pista2.getFilaAterrissagem2().removerAeronave();
                 }
                 pista2.getFilaAterrissagem2().setQtdAeronavesSairam(pista2.getFilaAterrissagem2().getQtdAeronavesSairam() + 1);
-
-                filas[1] = pista2.getFilaAterrissagem2().getNome();
 
                 aterrissagem2 = true;
                 qntTotalAeronavesSairam++;
@@ -717,20 +716,19 @@ public class Aeroporto {
                 somarTempoEsperaTotalTodasAeronavesSairam(a.getTempoEspera());
                 pista3.getFilaAterrissagem1().setTempoEsperaAeronavesSairam(pista3.getFilaAterrissagem1().getTempoEsperaAeronavesSairam() + a.getTempoEspera());
 
-                avioes[2] = a.getId();
+                aeronavesSairam.add(a);
                 acoes[2] = passageiroEspecial ? "aterrissou com emergência por possuir passageiro com necessidades especiais" : "aterrissou com emergência por combustível baixo";
             } else {
                 somarTempoEsperaTotalTodasAeronavesSairam(pista3.getFilaAterrissagem1().getFila().peek().getTempoEspera());
                 pista3.getFilaAterrissagem1().setTempoEsperaAeronavesSairam(pista3.getFilaAterrissagem1().getTempoEsperaAeronavesSairam() + pista3.getFilaAterrissagem1().getFila().peek().getTempoEspera());
 
-                avioes[2] = pista3.getFilaAterrissagem1().getFila().peek().getId();
+                aeronavesSairam.add(pista3.getFilaAterrissagem1().getFila().peek());
                 acoes[2] = "aterrissou com emergência por combustível baixo";
 
                 System.out.println("Aeronave " + pista3.getFilaAterrissagem1().getFila().peek().getId()+ " aterrissando na pista 3.");
                 pista3.getFilaAterrissagem1().removerAeronave();
             }
             pista3.getFilaAterrissagem1().setQtdAeronavesSairam(pista3.getFilaAterrissagem1().getQtdAeronavesSairam() + 1);
-            filas[2] = pista3.getFilaAterrissagem1().getNome();
 
             aterrissagem3 = true;
             qntTotalAeronavesSairam++;
@@ -774,9 +772,8 @@ public class Aeroporto {
             if (pista1.getFilaDecolagem().getFila().isEmpty()) {
                 System.out.println("Não há aeronaves na fila de decolagem.");
             } else {
-                avioes[0] = pista1.getFilaDecolagem().getFila().peek().getId();
+                aeronavesSairam.add(pista1.getFilaDecolagem().getFila().peek());
                 acoes[0] = "decolou";
-                filas[0] = pista1.getFilaDecolagem().getNome();
 
                 System.out.println("Aeronave " + pista1.getFilaDecolagem().getFila().peek().getId() + " decolando na pista 1.");
 
@@ -796,9 +793,8 @@ public class Aeroporto {
             if (pista2.getFilaDecolagem().getFila().isEmpty()) {
                 System.out.println("Não há aeronaves na fila de decolagem.");
             } else {
-                avioes[1] = pista2.getFilaDecolagem().getFila().peek().getId();
+                aeronavesSairam.add(pista2.getFilaDecolagem().getFila().peek());
                 acoes[1] = "decolou";
-                filas[1] = pista2.getFilaDecolagem().getNome();
 
                 System.out.println("Aeronave " + pista2.getFilaDecolagem().getFila().peek().getId() + " decolando na pista 2.");
 
@@ -818,9 +814,8 @@ public class Aeroporto {
             if (pista3.getFilaDecolagem().getFila().isEmpty()) {
                 System.out.println("Não há aeronaves na fila de decolagem.");
             } else {
-                avioes[2] = pista3.getFilaDecolagem().getFila().peek().getId();
+                aeronavesSairam.add(pista3.getFilaDecolagem().getFila().peek());
                 acoes[2] = "decolou";
-                filas[2] = pista3.getFilaDecolagem().getNome();
 
                 System.out.println("Aeronave " + pista3.getFilaDecolagem().getFila().peek().getId() + " decolando na pista 3.");
 
@@ -971,9 +966,8 @@ public class Aeroporto {
         tempoEsperaTotalTodasAeronavesSairam = 0;
 
         aeronavesCairam = new ArrayList<>();
+        aeronavesSairam = new ArrayList<>();
 
         acoes = new String[3];
-        avioes = new int[3];
-        filas = new String[3];
     }
 }
