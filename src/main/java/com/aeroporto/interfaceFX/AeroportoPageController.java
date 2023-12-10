@@ -161,14 +161,23 @@ public class AeroportoPageController implements Initializable, Disposable {
 
         alert.showAndWait();
 
-        int i = 0;
         content = "";
 
         StringBuilder contentBuilder = new StringBuilder();
-        for (Aeronave aeronave : Aeroporto.aeronavesSairam) {
-            contentBuilder.append("A aeronave ").append(aeronave.getId()).append(" da ").append(aeronave.getFila().getNome()).append(" da ").append(aeronave.getPista().getNome()).append(" ").append(Aeroporto.acoes[i]).append(".\n");
-            i++;
-        }
+        StringBuilder finalContentBuilder = contentBuilder;
+
+        Aeroporto.aeronavesSairam.forEach((key, value) -> {
+            finalContentBuilder.append("A aeronave ")
+                    .append(key.getId())
+                    .append(" da ")
+                    .append(key.getFila().getNome())
+                    .append(" da ")
+                    .append(key.getPista().getNome())
+                    .append(" ")
+                    .append(value)
+                    .append(".\n");
+        });
+
         content = contentBuilder.toString();
 
         if(Aeroporto.aeronavesSairam.isEmpty()){
