@@ -35,8 +35,6 @@ public class Aeroporto {
     public static int chegaramAterrissagem = 0;
     public static int chegaramDecolagem = 0;
     public static String[] acoes = new String[3];
-    /*public static String[] filas = new String[3];
-    public static int[] avioes = new int[3];*/
 
     enum CompanhiaAerea {
         GOL,
@@ -70,8 +68,6 @@ public class Aeroporto {
         aterrissagem3 = false;
         aeronavesSairam = new ArrayList<>();
         acoes = new String[3];
-        /*filas = new String[3];
-        avioes = new int[3];*/
 
         System.out.println("Simulando minuto...");
         this.minutosSimulados++;
@@ -111,8 +107,6 @@ public class Aeroporto {
         aterrissagem3 = false;
         aeronavesSairam = new ArrayList<>();
         acoes = new String[3];
-        /*filas = new String[3];
-        avioes = new int[3];*/
 
         System.out.println("Simulando minuto...");
         this.minutosSimulados++;
