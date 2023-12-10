@@ -147,7 +147,7 @@ public class Pista {
         if (filaAterrissagem2 != null)
             tempoDeEsperaFila2 = filaAterrissagem2.tempoDeEsperaTotal() + filaAterrissagem2.getTempoEsperaAeronavesSairam();
 
-        double tempoDeEsperaFila3 = filaDecolagem.tempoDeEsperaTotal();
+        double tempoDeEsperaFila3 = filaDecolagem.tempoDeEsperaTotal() + filaDecolagem.getTempoEsperaAeronavesSairam();
 
         double qntAeronavesFilas;
         double qntAeronavesFila1 = filaAterrissagem1.tamanho() + filaAterrissagem1.getQtdAeronavesSairam();

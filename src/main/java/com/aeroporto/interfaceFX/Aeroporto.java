@@ -657,14 +657,12 @@ public class Aeroporto {
                 System.out.println("Aeronave " + a.getId() + " aterrissando na pista 3.");
 
                 somarTempoEsperaTotalTodasAeronavesSairam(a.getTempoEspera());
-                pista3.getFilaAterrissagem1().setQtdAeronavesSairam(pista3.getFilaAterrissagem1().getQtdAeronavesSairam() + 1);
                 pista3.getFilaAterrissagem1().setTempoEsperaAeronavesSairam(pista3.getFilaAterrissagem1().getTempoEsperaAeronavesSairam() + a.getTempoEspera());
 
                 avioes[2] = a.getId();
                 acoes[2] = passageiroEspecial ? "aterrissou com emergência por possuir passageiro com necessidades especiais" : "aterrissou com emergência por combustível baixo";
             } else {
                 somarTempoEsperaTotalTodasAeronavesSairam(pista3.getFilaAterrissagem1().getFila().peek().getTempoEspera());
-                pista3.getFilaAterrissagem1().setQtdAeronavesSairam(pista3.getFilaAterrissagem1().getQtdAeronavesSairam() + 1);
                 pista3.getFilaAterrissagem1().setTempoEsperaAeronavesSairam(pista3.getFilaAterrissagem1().getTempoEsperaAeronavesSairam() + pista3.getFilaAterrissagem1().getFila().peek().getTempoEspera());
 
                 avioes[2] = pista3.getFilaAterrissagem1().getFila().peek().getId();
@@ -673,6 +671,7 @@ public class Aeroporto {
                 System.out.println("Aeronave " + pista3.getFilaAterrissagem1().getFila().peek().getId()+ " aterrissando na pista 3.");
                 pista3.getFilaAterrissagem1().removerAeronave();
             }
+            pista3.getFilaAterrissagem1().setQtdAeronavesSairam(pista3.getFilaAterrissagem1().getQtdAeronavesSairam() + 1);
             filas[2] = pista3.getFilaAterrissagem1().getNome();
 
             aterrissagem3 = true;
