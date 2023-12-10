@@ -156,4 +156,14 @@ public class FilaDeEspera {
         return this.tempoEsperaAeronavesSairam;
     }
 
+    public int getMenorCombustivel() {
+        int menorCombustivel = 16;
+
+        for (Aeronave a : fila) {
+            if (a.getCombustivel() < menorCombustivel) {
+                menorCombustivel = a.getCombustivel();
+            }
+        }
+        return menorCombustivel;
+    }
 }

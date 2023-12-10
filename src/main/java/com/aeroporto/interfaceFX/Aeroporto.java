@@ -120,6 +120,8 @@ public class Aeroporto {
 
         imprimirInformacoes();
 
+        reorganizarFilas();
+
         System.out.println("-------------");
         System.out.println("Aviaoes saindo: ");
         aterrissagem();
@@ -135,6 +137,32 @@ public class Aeroporto {
 
         imprimirInformacoes();
         imprimirSituacaoCombustivel();
+    }
+
+    public void reorganizarFilas(){
+        if(pista1.quantidadeAeronavesAterrissagem() == 0){
+            if(pista3.quantidadeAeronavesAterrissagem() <= 1) {
+                if (pista3.quantidadeAeronaves() > 1 && pista1.quantidadeAeronavesDecolagem() == 0) {
+                    pista1.getFilaDecolagem().adicionarAeronave(pista3.getFilaDecolagem().getFila().peek());
+                    pista3.getFilaDecolagem().removerAeronave();
+                }
+            } else {
+                pista1.getFilaAterrissagem1().adicionarAeronave(pista3.getFilaAterrissagem1().getFila().peek());
+                pista3.getFilaAterrissagem1().removerAeronave();
+            }
+        }
+
+        if(pista2.quantidadeAeronavesAterrissagem() == 0){
+            if(pista3.quantidadeAeronavesAterrissagem() <= 1){
+                if (pista3.quantidadeAeronaves() > 1 && pista2.quantidadeAeronavesDecolagem() == 0) {
+                    pista2.getFilaDecolagem().adicionarAeronave(pista3.getFilaDecolagem().getFila().peek());
+                    pista3.getFilaDecolagem().removerAeronave();
+                }
+            } else {
+                pista2.getFilaAterrissagem1().adicionarAeronave(pista3.getFilaAterrissagem1().getFila().peek());
+                pista3.getFilaAterrissagem1().removerAeronave();
+            }
+        }
     }
 
     public void mudarClima() {
@@ -221,10 +249,17 @@ public class Aeroporto {
                 pista1.getFilaAterrissagem1().getFila().remove(aeronave);
             } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
-                pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
-                aeronave.setPista(pista3);
-                aeronave.setFila(pista3.getFilaAterrissagem1());
-                pista1.getFilaAterrissagem1().getFila().remove(aeronave);
+                if(aeronave.getCombustivel() > pista3.quantidadeAeronavesAterrissagem() || (aeronave.getCombustivel() == 1 && aeronave.getCombustivel() != pista3.getFilaAterrissagem1().getMenorCombustivel())) {
+                    pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
+                    aeronave.setPista(pista3);
+                    aeronave.setFila(pista3.getFilaAterrissagem1());
+                    pista1.getFilaAterrissagem1().getFila().remove(aeronave);
+                } else if(pista1.getQtdCombustivel1() > 1 && aeronave.getCombustivel() == 1 && pista2.getQtdCombustivel1() == 0){
+                    pista2.getFilaAterrissagem1().adicionarAeronave(aeronave);
+                    aeronave.setPista(pista2);
+                    aeronave.setFila(pista2.getFilaAterrissagem1());
+                    pista1.getFilaAterrissagem1().getFila().remove(aeronave);
+                }
             }
         }
 
@@ -236,10 +271,17 @@ public class Aeroporto {
                 pista1.getFilaAterrissagem2().getFila().remove(aeronave);
             } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
-                pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
-                aeronave.setPista(pista3);
-                aeronave.setFila(pista3.getFilaAterrissagem1());
-                pista1.getFilaAterrissagem2().getFila().remove(aeronave);
+                if(aeronave.getCombustivel() > pista3.quantidadeAeronavesAterrissagem() || (aeronave.getCombustivel() == 1 && aeronave.getCombustivel() != pista3.getFilaAterrissagem1().getMenorCombustivel())) {
+                    pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
+                    aeronave.setPista(pista3);
+                    aeronave.setFila(pista3.getFilaAterrissagem1());
+                    pista1.getFilaAterrissagem2().getFila().remove(aeronave);
+                } else if(pista1.getQtdCombustivel1() > 1 && aeronave.getCombustivel() == 1 && pista2.getQtdCombustivel1() == 0){
+                    pista2.getFilaAterrissagem1().adicionarAeronave(aeronave);
+                    aeronave.setPista(pista2);
+                    aeronave.setFila(pista2.getFilaAterrissagem1());
+                    pista1.getFilaAterrissagem2().getFila().remove(aeronave);
+                }
             }
         }
 
@@ -251,10 +293,17 @@ public class Aeroporto {
                 pista2.getFilaAterrissagem1().getFila().remove(aeronave);
             } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
-                pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
-                aeronave.setPista(pista3);
-                aeronave.setFila(pista3.getFilaAterrissagem1());
-                pista2.getFilaAterrissagem1().getFila().remove(aeronave);
+                if(aeronave.getCombustivel() > pista3.quantidadeAeronavesAterrissagem() || (aeronave.getCombustivel() == 1 && aeronave.getCombustivel() != pista3.getFilaAterrissagem1().getMenorCombustivel())) {
+                    pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
+                    aeronave.setPista(pista3);
+                    aeronave.setFila(pista3.getFilaAterrissagem1());
+                    pista2.getFilaAterrissagem1().getFila().remove(aeronave);
+                } else if(pista2.getQtdCombustivel1() > 1 && aeronave.getCombustivel() == 1 && pista1.getQtdCombustivel1() == 0){
+                    pista1.getFilaAterrissagem1().adicionarAeronave(aeronave);
+                    aeronave.setPista(pista1);
+                    aeronave.setFila(pista1.getFilaAterrissagem1());
+                    pista2.getFilaAterrissagem1().getFila().remove(aeronave);
+                }
             }
         }
         List<Aeronave> filaCopy22 = new ArrayList<>(pista2.getFilaAterrissagem2().getFila());
@@ -265,10 +314,17 @@ public class Aeroporto {
                 pista2.getFilaAterrissagem2().getFila().remove(aeronave);
             } else if (aeronave.getCombustivel() < 4) {
                 System.out.println("Aeronave " + aeronave.getId() + " esta com combustivel muito critico.");
-                pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
-                aeronave.setPista(pista3);
-                aeronave.setFila(pista3.getFilaAterrissagem1());
-                pista2.getFilaAterrissagem2().getFila().remove(aeronave);
+                if(aeronave.getCombustivel() > pista3.quantidadeAeronavesAterrissagem() || (aeronave.getCombustivel() == 1 && aeronave.getCombustivel() != pista3.getFilaAterrissagem1().getMenorCombustivel())) {
+                    pista3.getFilaAterrissagem1().adicionarAeronave(aeronave);
+                    aeronave.setPista(pista3);
+                    aeronave.setFila(pista3.getFilaAterrissagem1());
+                    pista2.getFilaAterrissagem2().getFila().remove(aeronave);
+                } else if(pista2.getQtdCombustivel1() > 1 && aeronave.getCombustivel() == 1 && pista1.getQtdCombustivel1() == 0){
+                    pista1.getFilaAterrissagem1().adicionarAeronave(aeronave);
+                    aeronave.setPista(pista1);
+                    aeronave.setFila(pista1.getFilaAterrissagem1());
+                    pista2.getFilaAterrissagem2().getFila().remove(aeronave);
+                }
             }
         }
     }
@@ -406,7 +462,7 @@ public class Aeroporto {
         }
 
         if (filaPoucoCombustivel1.isEmpty() && filaPoucoCombustivel2.isEmpty()) {
-            return false;
+            return !fila1.getFila().isEmpty();
         } else if (filaPoucoCombustivel1.isEmpty()) {
             return false;
         } else if (filaPoucoCombustivel2.isEmpty()) {
@@ -459,7 +515,7 @@ public class Aeroporto {
                     a = acharAeronaveComPassageiroEspecial(pista1.getFilaAterrissagem1());
                 }
 
-                if(a == null){
+                if(a == null || (a.getCombustivel() > 1 && pista1.getFilaAterrissagem1().getMenorCombustivel() == 1)){
                     a = acharAeronaveMenorCombustivel(pista1.getFilaAterrissagem1());
                 } else {
                     passageiroEspecial = true;
@@ -501,7 +557,7 @@ public class Aeroporto {
                     a = acharAeronaveComPassageiroEspecial(pista1.getFilaAterrissagem2());
                 }
 
-                if(a == null){
+                if(a == null || (a.getCombustivel() > 1 && pista1.getFilaAterrissagem2().getMenorCombustivel() == 1)){
                     a = acharAeronaveMenorCombustivel(pista1.getFilaAterrissagem2());
                 } else {
                     passageiroEspecial = true;
@@ -554,7 +610,7 @@ public class Aeroporto {
                     a = acharAeronaveComPassageiroEspecial(pista2.getFilaAterrissagem1());
                 }
 
-                if(a == null){
+                if(a == null || (a.getCombustivel() > 1 && pista2.getFilaAterrissagem1().getMenorCombustivel() == 1)){
                     a = acharAeronaveMenorCombustivel(pista2.getFilaAterrissagem1());
                 } else{
                     passageiroEspecial = true;
@@ -595,7 +651,7 @@ public class Aeroporto {
                     a = acharAeronaveComPassageiroEspecial(pista2.getFilaAterrissagem2());
                 }
 
-                if(a == null){
+                if(a == null || (a.getCombustivel() > 1 && pista2.getFilaAterrissagem2().getMenorCombustivel() == 1)){
                     a = acharAeronaveMenorCombustivel(pista2.getFilaAterrissagem2());
                 } else {
                     passageiroEspecial = true;
@@ -633,6 +689,8 @@ public class Aeroporto {
             }
         }
 
+        passageiroEspecial = false;
+
         if (pista3.getFilaAterrissagem1().getFila().isEmpty()) {
             System.out.println("Não há aeronaves na fila de aterrissagem 1.");
         } else {
@@ -643,7 +701,7 @@ public class Aeroporto {
                 a = acharAeronaveComPassageiroEspecial(pista3.getFilaAterrissagem1());
             }
 
-            if(a == null){
+            if(a == null || (a.getCombustivel() > 1 && pista3.getFilaAterrissagem1().getMenorCombustivel() == 1)){
                 a = acharAeronaveMenorCombustivel(pista3.getFilaAterrissagem1());
             } else {
                 passageiroEspecial = true;

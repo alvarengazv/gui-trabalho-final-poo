@@ -207,4 +207,24 @@ public class Pista {
     public int getQtdAterrissagensEmergenciais(){
         return this.qtdAterrissagensEmergenciais;
     }
+
+    public int getQtdCombustivel1(){
+        int qtd = 0;
+
+        for(Aeronave a : filaAterrissagem1.getFila()){
+            if(a.getCombustivel() == 1){
+                qtd++;
+            }
+        }
+
+        if(filaAterrissagem2 != null){
+            for(Aeronave a : filaAterrissagem2.getFila()){
+                if(a.getCombustivel() == 1){
+                    qtd++;
+                }
+            }
+        }
+
+        return qtd;
+    }
 }
